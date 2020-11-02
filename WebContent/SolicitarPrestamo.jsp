@@ -12,32 +12,24 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
-     			<li class="nav-item active">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPerfil.jsp">Home </a>
-     			 </li>
-     			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Transferencia.jsp">Transferencias</a>
-      			</li>
-      			<li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaCuenta.jsp">Historial de Cuentas</a>
+     			 <li class="nav-item active">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPrestamo.jsp">Cuentas Bancarias</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Prestamo.jsp">Prestamos </a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaTransferencia.jsp">Mis Préstamos</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPago.jsp">Pagos</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPagos.jsp">Transferencias</a>
       			</li>
     		</ul>
   		</div>
-  		
   		 <div class="dropdown">
   			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  				  Iniciar Sesion
+  				  Nombre
  			 </button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  				  <a class="dropdown-item" href="#">user</a>
-  				  <a class="dropdown-item" href="#">mail</a>
-  				  <a class="dropdown-item" href="#">Something else here</a>
+  				  <a class="dropdown-item" href="#">Perfil</a>
+  				  <a class="dropdown-item" href="#">Cerrar Sesión</a>
  			 </div>
 		</div>
 	</nav>
