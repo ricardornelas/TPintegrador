@@ -13,7 +13,7 @@
 			<div class="card-body col-sm-10">
 				<form>
 					<div class="form-group text center">
-						<img src="imagen banco.jpg" alt = "70" width="170"/>
+						<img  src="img/imagen banco.jpg" alt = "70" width="170"/>
 						<label> Bienvenidos al sistema</label>
 					</div>
 					<div class="form-group">
@@ -21,8 +21,8 @@
 						<input type = "text" name = "txtUsuario" class = "form-control">
 					</div>
 					<div class="form-group">
-						<label>Contraseña: </label>
-						<input type = "password" name = "txtContraseña" class = "form-control">
+						<label>ContraseÃ±a: </label>
+						<input type = "password" name = "txtContraseÃ±a" class = "form-control">
 					</div>
 					<input type = "submit" name = "btnLogin" value = "Ingresar" class = "btn btn-primary btn-block">
 				</form>
