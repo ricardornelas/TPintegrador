@@ -12,16 +12,16 @@
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
      			 <li class="nav-item active">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPerfil.jsp">Home </a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPrincipal.jsp">Home </a>
      			 </li>
      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaTransferencias.jsp">Transferencias</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaTransferencia.jsp">Transferencias</a>
       			</li>
       			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaCuenta.jsp">Historial de Cuentas</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Prestamo.jsp">Prestamos </a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPrestamo.jsp">Prestamos </a>
       			</li>
       			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPago.jsp">Pagos</a>

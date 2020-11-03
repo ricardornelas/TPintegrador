@@ -24,7 +24,7 @@
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaTransferencia.jsp">Transferencia</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPagos.jsp">Pagos</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPago.jsp">Pagos</a>
       			</li>
       			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPerfil.jsp">Perfil</a>
