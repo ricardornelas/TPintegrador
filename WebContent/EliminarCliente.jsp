@@ -30,14 +30,17 @@
   				  Administrador
  			 </button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  				  <a class="dropdown-item" href="#">Cerrar Sesión</a>
+  				  <a class="dropdown-item" href="#">Cerrar Sesi�n</a>
  			 </div>
 		</div>
 	</nav>
 			<form >
+			
 			<br>
-			<h1>Modificar Cliente</h1>
+			<H1>Eliminar Usuario</H1>
 			<br>
+			
+			
 <div class="form-group">
 					<label>Filtrar por Cuil:</label>
 					<input type="text" name="txtCuil" class="form-control">
@@ -45,24 +48,19 @@
 			
 			<table border="1" style="width: 393px; height: 47px">
 <tr> <th><CENTER>Cuil</CENTER></th><th><CENTER>Nombre</CENTER></th><th><CENTER>Apellido</CENTER></th><th><CENTER>Usuario</CENTER></th><th></th>
-<tr> <th></th><th></th><th></th><th></th><th> <CENTER> <input type="submit" name="btnEditar" value="Seleccionar"> </CENTER></th>
+<tr> <th></th><th></th><th></th><th></th><th> <CENTER> <input type="submit" name="btnEliminar" value="Eliminar"> </CENTER></th>
 
 </table>
 			
 <p><p>		
 <label>Usuario: (Se muestra el usuario seleccionado)</label>			
+<br><br>
 
-<div class="form-group">
-					<label>Nueva Contraseña:</label>
-					<input type="password" name="txtContraseÃ±a" class="form-control">
-					
-					<p>
-					
-					<label>Repetir Contraseña:</label>
-					<input type="password" name="txtRepContraseÃ±a" class="form-control">
-					
-					
-				</div>	
+					<label>Est� seguro que desea eliminarlo?</label>
+					<br>
+					<input type="submit" name="Eliminar" value="Aceptar">
+					<input type="submit" name="Cancelar" value="Cancelar">
+
 </form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

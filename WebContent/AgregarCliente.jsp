@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">		
-		<title>Insert title here</title>
+			<title>Registrar Cliente</title>
 	</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
@@ -15,16 +15,16 @@
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaEmpleado.jsp">Home </a>
      			 </li>
      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="agregarClienteEmpleado.jsp">Agregar Cliente</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCliente.jsp">Agregar Usuario</a>
       			</li>
       			<li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="agregarCuenta.jsp">Agregar Cuenta</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
       			</li>
       			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaSolicitudPrestamo.jsp">Prestamos Solicitados</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ModificarCliente.jsp">Modificiar Cliente</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ModificarUsuario.jsp">Modificiar Usuario</a>
       			</li>
       			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaInformes.jsp">Informes</a>
@@ -44,20 +44,10 @@
 	</nav>
 	<div class="card">
 		<div class="card-body">
-			<form>
-			<div class="form-check form-check-inline">
-				<label>Tipo de Usuario:</label>
- 				 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Empleado">
- 				 <label class="form-check-label" for="inlineCheckbox1">Empleado</label>
-				</div>
-				<div class="form-check form-check-inline">
- 				 <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Cliente">
-  				<label class="form-check-label" for="inlineCheckbox2">Cliente</label>
-				</div>
-				<div class="form-group">
-					<label>DNI:</label>
-					<input type="text" name="txtDni" class="form-control">
-				</div>
+			<form >
+		
+		<h1>NUEVO CLIENTE</h1>
+			
 				<div class="form-group">
 					<label>Nombre:</label>
 					<input type="text" name="txtNombre" class="form-control">
@@ -66,26 +56,47 @@
 					<label>Apellido:</label>
 					<input type="text" name="txtApellido" class="form-control">
 				</div>
+				<div class="form-group">
+					<label>DNI:</label>
+					<input type="text" name="txtDni" class="form-control">
+				</div>
+								<div class="form-group">
+					<label>Cuil:</label>
+					<input type="text" name="txtCuil" class="form-control">
+				</div>
+				<div class="form-check form-check-inline">
+				<label>SEXO:     </label>
+ 				 <input class="form-check-input" type="radio" name="RadioGenero" value="Masculino">
+ 				 <label class="form-check-label" for="inlineRadio1">Masculino</label>
+				</div>
+				<div class="form-check form-check-inline">
+			
+ 				 <input class="form-check-input" type="radio" name="RadioGenero"  value="Femenino">
+  				<label class="form-check-label" for="inlineRadio2">Femenino</label>
+				</div>
+				<br>
 				<label for="start">Fecha de nacimiento :</label>
 				<br>
 				<input type="date" id="start" name="trip-start" min="1901-01" max="2018-12-31">
+				
 				<div class="form-group">
-					<label>Nombre de usuario:</label>
-					<input type="text" name="txtUsuario" class="form-control">
-				</div>
-				<div class="form-group">
-					<label>Direccion:</label>
-					<input type="text" name="txtDireccion" class="form-control">
+					<label>Nacionalidad:</label>
+					<input type="text" name="txtNacionalidad" class="form-control">
 				</div>
 				<div class="form-group">
       			<label for="inputState">Provincia</label>
-    				 <select id="inputState" class="form-control">
+    				 <select id="ddlProvincia" class="form-control">
         				<option selected>Seleccionar provincia</option>
        					 <option>...</option>
       				</select>
 				<div class="form-group">
+					<label>Direccion:</label>
+					<input type="text" name="txtDireccion" class="form-control">
+				</div>
+				
+				<div class="form-group">
       			<label for="inputState">Localidad</label>
-    				 <select id="inputState" class="form-control">
+    				 <select id="ddlLocalidad" class="form-control">
         				<option selected>Seleccionar localidad</option>
        					 <option>...</option>
       				</select>
@@ -94,21 +105,24 @@
 					<input type="text" name="txtTelefono" class="form-control">
 				</div>
 				<div class="form-group">
+					<label>Nombre de usuario:</label>
+					<input type="text" name="txtUsuario" class="form-control">
+				</div>
+				<div class="form-group">
 					<label>Correo electronico:</label>
 					<input type="text" name="txtEmail" class="form-control">
 				</div>
-				<div class="form-check form-check-inline">
-				<label>SEXO:     </label>
- 				 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Masculino">
- 				 <label class="form-check-label" for="inlineCheckbox1">Masculino</label>
+			<div class="form-group">
+					<label>Contraseña:</label>
+					<input type="password" name="txtContraseña" class="form-control">
 				</div>
-				<div class="form-check form-check-inline">
-			
- 				 <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Femenino">
-  				<label class="form-check-label" for="inlineCheckbox2">Femenino</label>
+												<div class="form-group">
+					<label>Repetir Contraseña:</label>
+					<input type="password" name="txtRepContraseña" class="form-control">
 				</div>
+				
 				<br><br>
-				<input type = "submit" name"action" value="Agregar" class="btn btn-info">
+				<input type = "submit" name="btnAgregar" value="Agregar" class="btn btn-info">
 			</form>
 		</div>
 	</div>
