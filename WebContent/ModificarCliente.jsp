@@ -12,16 +12,16 @@
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarUsuario.jsp">Clientes</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCliente.jsp">Clientes</a>
       			</li>
       			<li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCuenta.jsp">Crear Nuevo Administrador</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarAdministrador.jsp">Crear Nuevo Administrador</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaSolicitudPrestamo.jsp">Prestamos Solicitados</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="PrestamosSolicitados.jsp">Prestamos Solicitados</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaInformes.jsp">Informes</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
     		</ul>
   		</div>

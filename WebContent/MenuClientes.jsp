@@ -11,14 +11,14 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
-     			 <li class="nav-item active">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPrestamo.jsp">Cuentas Bancarias</a>
+     		 <li class="nav-item active">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuClientes.jsp">Home </a>
+     			 </li>
+      			 <li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="PrestamosSolicitados.jsp">Prestamos Solicitados</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaTransferencia.jsp">Mis Préstamos</a>
-      			</li>
-      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPagos.jsp">Transferencias</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
     		</ul>
   		</div>
@@ -37,11 +37,13 @@
 			<br>
 			<H1>Menu Clientes</H1>
 			<br>
-			<input type="submit" value="Agregar Cliente" style="width:300px;"><br><br>
-			<input type="submit" value="Agregar Cuenta"style="width:300px;"><br><br>
-			<input type="submit" value="Modificar Cliente"style="width:300px;"><br><br>
-			<input type="submit" value="Eliminar Cliente"style="width:300px;">
-		
+			<div class="btn-group-vertical btn-light bg-info">
+				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCliente.jsp">Agregar Cliente</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="ModificarCliente.jsp">Modificar Cliente</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="EliminarCliente.jsp">Eliminar Cliente</a>
+			</div>
+			
 </form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -12,7 +12,7 @@
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
      			 <li class="nav-item active">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaEmpleado.jsp">Home </a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuClientea.jsp">Home </a>
      			 </li>
      			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCliente.jsp">Agregar Usuario</a>
@@ -21,13 +21,13 @@
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaSolicitudPrestamo.jsp">Prestamos Solicitados</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="PrestamosSolicitados.jsp">Prestamos Solicitados</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ModificarUsuario.jsp">Modificiar Usuario</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ModificarCliente.jsp">Modificiar Cliente</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaInformes.jsp">Informes</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
     		</ul>
   		</div>
