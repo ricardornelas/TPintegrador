@@ -44,7 +44,7 @@
 	</nav>
 	<div class="card">
 		<div class="card-body">
-			<form >
+			<form action = "ServletCliente" method ="get">
 		
 		<h1>NUEVO CLIENTE</h1>
 			
@@ -66,18 +66,18 @@
 				</div>
 				<div class="form-check form-check-inline">
 				<label>SEXO:     </label>
- 				 <input class="form-check-input" type="radio" name="RadioGenero" value="Masculino">
+ 				 <input class="form-check-input" type="radio" name="RadioGenero" value="0">
  				 <label class="form-check-label" for="inlineRadio1">Masculino</label>
 				</div>
 				<div class="form-check form-check-inline">
 			
- 				 <input class="form-check-input" type="radio" name="RadioGenero"  value="Femenino">
+ 				 <input class="form-check-input" type="radio" name="RadioGenero"  value="1">
   				<label class="form-check-label" for="inlineRadio2">Femenino</label>
 				</div>
 				<br>
 				<label for="start">Fecha de nacimiento :</label>
 				<br>
-				<input type="date" id="start" name="trip-start" min="1901-01" max="2018-12-31">
+				<input type="date" name="FechaNac" min="1901-01-01" max="2018-12-31" >
 				
 				<div class="form-group">
 					<label>Nacionalidad:</label>
@@ -89,6 +89,7 @@
         				<option selected>Seleccionar provincia</option>
        					 <option>...</option>
       				</select>
+      				</div>
 				<div class="form-group">
 					<label>Direccion:</label>
 					<input type="text" name="txtDireccion" class="form-control">
@@ -113,12 +114,12 @@
 					<input type="text" name="txtEmail" class="form-control">
 				</div>
 			<div class="form-group">
-					<label>Contraseña:</label>
-					<input type="password" name="txtContraseña" class="form-control">
+					<label>ContraseÃ±a:</label>
+					<input type="password" name="txtPassword" class="form-control">
 				</div>
 												<div class="form-group">
-					<label>Repetir Contraseña:</label>
-					<input type="password" name="txtRepContraseña" class="form-control">
+					<label>Repetir ContraseÃ±a:</label>
+					<input type="password" name="txtRepPassword" class="form-control">
 				</div>
 				
 				<br><br>
