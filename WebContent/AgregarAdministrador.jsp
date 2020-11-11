@@ -5,26 +5,20 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">		
-			<title>Registrar Cliente</title>
+			<title>Registrar Administrador</title>
 	</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
-     			 <li class="nav-item active">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuClientea.jsp">Home </a>
-     			 </li>
      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCliente.jsp">Agregar Usuario</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCliente.jsp">Clientes</a>
       			</li>
       			<li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarAdministrador.jsp">Crear Nuevo Administrador</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="PrestamosSolicitados.jsp">Prestamos Solicitados</a>
-      			</li>
-      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ModificarCliente.jsp">Modificiar Cliente</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="SolicitarPrestamo.jsp">Prestamos Solicitados</a>
       			</li>
       			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
@@ -33,86 +27,24 @@
   		</div>
   		 <div class="dropdown">
   			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  				  Iniciar Sesion
+  				  Administrador
  			 </button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  				  <a class="dropdown-item" href="#">user</a>
-  				  <a class="dropdown-item" href="#">mail</a>
-  				  <a class="dropdown-item" href="#">Something else here</a>
+  				  <a class="dropdown-item" href="#">Cerrar Sesion</a>
  			 </div>
 		</div>
 	</nav>
-	<div class="card">
-		<div class="card-body">
-			<form action = "ServletCliente" method ="get">
-		
-		<h1>NUEVO CLIENTE</h1>
+	
+			<form form action = "ServletAdministrador" method ="get">
+	<br>	
+		<h1>Nuevo Administrador</h1>
 			
-				<div class="form-group">
-					<label>Nombre:</label>
-					<input type="text" name="txtNombre" class="form-control">
-				</div>
-				<div class="form-group">
-					<label>Apellido:</label>
-					<input type="text" name="txtApellido" class="form-control">
-				</div>
-				<div class="form-group">
-					<label>DNI:</label>
-					<input type="text" name="txtDni" class="form-control">
-				</div>
-								<div class="form-group">
-					<label>Cuil:</label>
-					<input type="text" name="txtCuil" class="form-control">
-				</div>
-				<div class="form-check form-check-inline">
-				<label>SEXO:     </label>
- 				 <input class="form-check-input" type="radio" name="RadioGenero" value="0">
- 				 <label class="form-check-label" for="inlineRadio1">Masculino</label>
-				</div>
-				<div class="form-check form-check-inline">
-			
- 				 <input class="form-check-input" type="radio" name="RadioGenero"  value="1">
-  				<label class="form-check-label" for="inlineRadio2">Femenino</label>
-				</div>
-				<br>
-				<label for="start">Fecha de nacimiento :</label>
-				<br>
-				<input type="date" name="FechaNac" min="1901-01-01" max="2018-12-31" >
 				
-				<div class="form-group">
-					<label>Nacionalidad:</label>
-					<input type="text" name="txtNacionalidad" class="form-control">
-				</div>
-				<div class="form-group">
-      			<label for="inputState">Provincia</label>
-    				 <select id="ddlProvincia" class="form-control">
-        				<option selected>Seleccionar provincia</option>
-       					 <option>...</option>
-      				</select>
-      				</div>
-				<div class="form-group">
-					<label>Direccion:</label>
-					<input type="text" name="txtDireccion" class="form-control">
-				</div>
-				
-				<div class="form-group">
-      			<label for="inputState">Localidad</label>
-    				 <select id="ddlLocalidad" class="form-control">
-        				<option selected>Seleccionar localidad</option>
-       					 <option>...</option>
-      				</select>
-				<div class="form-group">
-					<label>Telefono:</label>
-					<input type="text" name="txtTelefono" class="form-control">
-				</div>
 				<div class="form-group">
 					<label>Nombre de usuario:</label>
 					<input type="text" name="txtUsuario" class="form-control">
 				</div>
-				<div class="form-group">
-					<label>Correo electronico:</label>
-					<input type="text" name="txtEmail" class="form-control">
-				</div>
+
 			<div class="form-group">
 					<label>Contraseña:</label>
 					<input type="password" name="txtPassword" class="form-control">
@@ -133,5 +65,3 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
-
-	
