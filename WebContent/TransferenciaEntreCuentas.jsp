@@ -12,35 +12,23 @@
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
      			 <li class="nav-item active">
-<a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPrincipal.jsp">Home </a>
-     			 </li>
-     			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaTransferencia.jsp">Transferencias</a>
-      			</li>
-      			<li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaCuenta.jsp">Historial de Cuentas</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="CuentasBancarias.jsp">Cuentas Bancarias</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPrestamo.jsp">Prestamos </a>
-       				 </li>
-       				 <li>
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPrestamo.jsp">Cuentas Bancarias</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MisPrestamos.jsp">Mis Prestamos</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaTransferencia.jsp">Mis Prestamos</a>
-</li>
-      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPagos.jsp">Transferencias</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Transferencia.jsp">Transferencias</a>
       			</li>
     		</ul>
   		</div>
   		 <div class="dropdown">
   			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  				  Nombre
+  				  <%=(String)session.getAttribute("NombreClienteConectado") %>
  			 </button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  				  <a class="dropdown-item" href="#">Perfil</a>
-  				  <a class="dropdown-item" href="#">Cerrar Sesion</a>
+  				  <a class="dropdown-item" href="Perfil.jsp">Perfil</a>
+  				  <a class="dropdown-item" href="Login.jsp">Cerrar Sesion</a>
  			 </div>
 		</div>
 	</nav>

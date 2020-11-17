@@ -1,3 +1,6 @@
+<%@page import="NegocioImpl.CuentaNegocioImpl"%>
+<%@page import="Entidad.TipoDeCuenta"%>
+<%@page import="Controlador.ServletCuenta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import=" java.util.Date"%>
@@ -12,16 +15,16 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
-     			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ModificarCliente.jsp">Clientes</a>
-      			</li>
-      			<li class="nav-item">
+     		 <li class="nav-item active">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuClientes.jsp">Clientes </a>
+     			 </li>
+      			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarAdministrador.jsp">Crear Nuevo Administrador</a>
       			</li>
       			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="PrestamosSolicitados.jsp">Prestamos Solicitados</a>
       			</li>
-      			 <li class="nav-item">
+      			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
     		</ul>
@@ -31,14 +34,14 @@
   				  Administrador
  			 </button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  				  <a class="dropdown-item" href="#">Cerrar SesiÃ³n</a>
+  				  <a class="dropdown-item" href="Login.jsp">Cerrar Sesión</a>
  			 </div>
 		</div>
 	</nav>
 
 	<div class="card">
 		<div class="card-body">
-			<form>
+			<form action="ServletCuenta" method="doGet">
 			<H1>Agregar Cuenta</H1>
 			<br>
 			<div class="form-group">
@@ -49,10 +52,19 @@
 				<div class="form-group">
       			<br>
       			<label for="inputState">Tipo de cuenta</label>
-    				 <select id="ddlTipoCuenta" class="form-control">
-        				<option selected>Seleccionar Tipo de Cuenta</option>
+    				 <select name="ddlTipoCuenta" class="form-control">
+        					<option selected disabled>Seleccionar Tipo de Cuenta</option>
+
+        				<% ServletCuenta controlador = new ServletCuenta();
+        				
+      						for(TipoDeCuenta aux : controlador.TiposDeCuentas()){
+      					%>
+	      					<option value=<%=aux.getId()%>><%=aux.getDescripcion()%></option>
+      					<%
+      						}
+      					%>
       				</select>
-					
+
 <br><br>
 				<input type = "submit" name="btnAgregar" value="Agregar" class="btn btn-info">
 			</form>

@@ -2,15 +2,10 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<style>
-table,th,td{
-	border: 1px solid black;
-}
-</style>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">		
-		<title>Insert title here</title>
+			<title>Transferencias</title>
 	</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
@@ -37,38 +32,25 @@ table,th,td{
  			 </div>
 		</div>
 	</nav>
-<br>
-<H1>Prestamos</H1>
-<br>
-<table style="width: 100%">
-	<thead style="text-align: center;">
-		<tr>
-			<th>Codigo</th>
-			<th>CBU de cuenta</th>
-			<th>Importe total a Pagar</th>
-			<th>Importe Pedido</th>
-			<th>Monto por Mes</th>
-			<th>Cantidad de Cuotas</th>
-			<th>Cuotas Pagadas</th>
-			<th>Cuotas Faltantes</th>
-		</tr>
-	</thead>
-	<tr>
-		<td> </td>
-		<td> </td>
-		<td>$ </td>
-		<td>$ </td>
-		<td>$ </td>
-		<td> </td>
-		<td> </td>
-		<td> </td>
-		<td style="width: 1px"> <input type="submit" value="Seleccionar"></td>
-	</tr>
-		
-</table>
-<br>
-<div style="text-align: center;"><input type="submit" value="Solicitar Nuevo Prestamo"></div>
-
+	<div class="card">
+		<div class="card-body">
+			<form>
+			
+			<h1>TRANSFERENCIAS</h1>
+			
+			<div class="form-group">
+					<label>Ingrese numero de CBU de la cuenta destino:</label>
+					<input type="text" name="txtCbu" class="form-control">
+				</div>
+					<div class="form-group">
+					<label>Monto a transferir:</label>
+					<input type="text" name="txtCbu" class="form-control">
+				</div>
+			
+			<br><br>
+				<input type = "submit" name="btnTransferir" value="Transferir" class="btn btn-info">
+			</form>
+			
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

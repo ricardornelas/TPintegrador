@@ -11,34 +11,26 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
-     			 <li class="nav-item active">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuClientea.jsp">Home </a>
+     		 <li class="nav-item active">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuClientes.jsp">Clientes </a>
      			 </li>
-     			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCliente.jsp">Agregar Usuario</a>
-      			</li>
-      			<li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
+      			 <li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarAdministrador.jsp">Crear Nuevo Administrador</a>
       			</li>
       			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="PrestamosSolicitados.jsp">Prestamos Solicitados</a>
       			</li>
-      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ModificarCliente.jsp">Modificiar Cliente</a>
-      			</li>
-      			 <li class="nav-item">
+      			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
     		</ul>
   		</div>
   		 <div class="dropdown">
   			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  				  Iniciar Sesion
+  				  Administrador
  			 </button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  				  <a class="dropdown-item" href="#">user</a>
-  				  <a class="dropdown-item" href="#">mail</a>
-  				  <a class="dropdown-item" href="#">Something else here</a>
+  				  <a class="dropdown-item" href="Login.jsp">Cerrar Sesión</a>
  			 </div>
 		</div>
 	</nav>
@@ -114,11 +106,11 @@
 					<input type="text" name="txtEmail" class="form-control">
 				</div>
 			<div class="form-group">
-					<label>ContraseÃ±a:</label>
+					<label>Contraseña:</label>
 					<input type="password" name="txtPassword" class="form-control">
 				</div>
 												<div class="form-group">
-					<label>Repetir ContraseÃ±a:</label>
+					<label>Repetir Contraseña:</label>
 					<input type="password" name="txtRepPassword" class="form-control">
 				</div>
 				

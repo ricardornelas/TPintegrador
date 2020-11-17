@@ -1,3 +1,7 @@
+<%@page import="Entidad.Usuario"%>
+<%@page import="Entidad.Cuenta"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Controlador.ServletCuenta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,27 +24,23 @@ text-align: center;
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
      			 <li class="nav-item active">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPrestamo.jsp">Cuentas Bancarias</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="CuentasBancarias.jsp">Cuentas Bancarias</a>
       			</li>
       			 <li class="nav-item">
-<<<<<<< HEAD:WebContent/ventanaPrincipal.jsp
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPago.jsp">Pagos</a>
-=======
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaTransferencia.jsp">Mis Préstamos</a>
->>>>>>> f03d1dd4019e7b277496fe1fa522db57b292fd73:WebContent/CuentasBancarias.jsp
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MisPrestamos.jsp">Mis Prestamos</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="ventanaPagos.jsp">Transferencias</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Transferencia.jsp">Transferencias</a>
       			</li>
     		</ul>
   		</div>
   		 <div class="dropdown">
   			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  				  Nombre
+  				  <%=(String)session.getAttribute("NombreClienteConectado") %>
  			 </button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  				  <a class="dropdown-item" href="#">Perfil</a>
-  				  <a class="dropdown-item" href="#">Cerrar Sesión</a>
+  				  <a class="dropdown-item" href="Perfil.jsp">Perfil</a>
+  				  <a class="dropdown-item" href="Login.jsp">Cerrar Sesion</a>
  			 </div>
 		</div>
 	</nav>
@@ -48,26 +48,36 @@ text-align: center;
 		<br>
 		<h1>Cuentas bancarias</h1>
 		<br>
-		
+		<form action="ServletCuenta" method="post">
+		<%ArrayList<Cuenta> Lista = new ServletCuenta().CuentasXCUIL(((Usuario)session.getAttribute("UsuarioConectado")).getNombreU()); %>
 		<table style="width:90%">
 		<thead>
 			<tr>
 				<th>Cuenta Nro</th>
 				<th>CBU</th>
 				<th>Tipo de Cuenta</th>
-				<th>Fecha de Creación</th>
+				<th>Fecha de Creacion</th>
 				<th>Saldo</th>
 			</tr>
 		</thead>
+		<%for(Cuenta reg:Lista){int i=1; %>
 		<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>$</td>
+				<td><%=i%></td>
+				<td><%=reg.getCBU() %></td>
+				<td>
+				<%if(reg.getIdTipoCuenta()==1){ %>
+				Caja de Ahorro
+				<%} else {%>
+				Cuenta Corriente
+				<%} %>
+				</td>
+				<td><%=reg.getFechaCreacion() %></td>
+				<td>$<%=reg.getSaldo() %></td>
 				<td style="width:1px"><input type="submit" value="Ver Historial de Movimientos"></td>
 			</tr>
+			<%i++;} %>
 		</table>
+		</form>
 		
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -11,16 +11,16 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
-     			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarCliente.jsp">Clientes</a>
-      			</li>
-      			<li class="nav-item">
+     		 <li class="nav-item active">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuClientes.jsp">Clientes </a>
+     			 </li>
+      			 <li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="AgregarAdministrador.jsp">Crear Nuevo Administrador</a>
       			</li>
       			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="SolicitarPrestamo.jsp">Prestamos Solicitados</a>
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="PrestamosSolicitados.jsp">Prestamos Solicitados</a>
       			</li>
-      			 <li class="nav-item">
+      			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
     		</ul>
@@ -30,7 +30,7 @@
   				  Administrador
  			 </button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  				  <a class="dropdown-item" href="#">Cerrar Sesion</a>
+  				  <a class="dropdown-item" href="Login.jsp">Cerrar Sesión</a>
  			 </div>
 		</div>
 	</nav>
@@ -46,11 +46,11 @@
 				</div>
 
 			<div class="form-group">
-					<label>ContraseÃ±a:</label>
+					<label>Contraseña:</label>
 					<input type="password" name="txtPassword" class="form-control">
 				</div>
 												<div class="form-group">
-					<label>Repetir ContraseÃ±a:</label>
+					<label>Repetir Contraseña:</label>
 					<input type="password" name="txtRepPassword" class="form-control">
 				</div>
 				
