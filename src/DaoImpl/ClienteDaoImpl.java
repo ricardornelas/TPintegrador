@@ -5,22 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import Dao.ClienteDao;
 import Entidad.Cliente;
-import Entidad.Usuario;
 
 
 
-public class ClienteDaoImpl implements ClienteDao{
+public class ClienteDaoImpl {
 	
 	private static final String Insertar = "INSERT INTO clientes (CUIL_Cli, DNI_Cli, Nombre_Cli, Apellido_Cli, Sexo_Cli, Nacionalidad_Cli, FechaNacimiento_Cli, Direccion_Cli, IdLocalidad_Cli, IdProvincia_Cli,"
 			+ " CorreoElectronico_Cli, Usuario_Cli, NroTelefono_Cli) VALUES(?, ?, ?, ?,?, ?,?, ?,?, ?,?, ?,?)";
-	private static final String Listar = "SELECT * FROM Clientes INNER JOIN Usuarios ON Usuario_Usu = Usuario_Cli WHERE Estado_Usu = 1";
-	private static final String Filtrar = "SELECT * FROM Clientes INNER JOIN Usuarios ON Usuario_Usu = Usuario_Cli WHERE Estado_Usu = 1 AND CUIL_Cli LIKE '%";
-	private static final String BuscarClienteXUsuario = "SELECT CUIL_Cli,DNI_Cli,Nombre_Cli,Apellido_Cli,Sexo_Cli,Nacionalidad_Cli,FechaNacimiento_Cli,Direccion_Cli,"
-			+ "Descripcion_Loc,Descripcion_Pro,CorreoElectronico_Cli,Usuario_Cli,NroTelefono_Cli FROM clientes INNER JOIN localidades ON IdLocalidad_Loc=IdLocalidad_Cli"
-			+ " INNER JOIN provincias ON IdProvincia_Pro=IdProvincia_Cli WHERE Usuario_Cli = ";
+	private static final String Listar = "SELECT Nombre_Cli, Apellido_Cli, Usuario_Cli FROM Clientes";
+	private static final String Eliminar = "Delete from personas where Usuario_Cli = ?";
 	
 	public boolean Agregar(Cliente cliente) {
 		
@@ -95,49 +89,32 @@ public class ClienteDaoImpl implements ClienteDao{
 	return null;
 	}
 	
-	public ResultSet LeerClientesCUIL(String CUIL){
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	public boolean Eliminar(Cliente cliente) {
+		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		
-		Statement st;
-		
-	try {
-		st = conexion.createStatement();
-		ResultSet result = st.executeQuery(Filtrar+CUIL+"%'");
-		return result;		
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	return null;
-	}
+		boolean SeElimino = false;
+		try
+		{
+			statement = conexion.prepareStatement(Eliminar);
+			statement.setString(1, cliente.getUsuario());
 
-
-
-	@Override
-	public ResultSet DevolverCliente(String Usuario) {
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				SeElimino= true;
+			}
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
-		Connection conexion = Conexion.getConexion().getSQLConexion();
 		
-		Statement st;
-		
-	try {
-		st = conexion.createStatement();
-		ResultSet result = st.executeQuery(BuscarClienteXUsuario+ " '" +Usuario + "'");
-		return result;	
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	return null;
+		return SeElimino;
 	}
 	
 }
