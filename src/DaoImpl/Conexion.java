@@ -16,7 +16,7 @@ public class Conexion {
 		try
 		{
 			//Class.forName("com.mysql.cj.jdbc.Driver"); 
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdintegrador","root","admin");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdintegrador?serverTimezone=UTC","root","ROOT");
 			this.connection.setAutoCommit(false);
 		}
 		catch(Exception e)

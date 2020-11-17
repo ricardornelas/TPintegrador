@@ -102,6 +102,14 @@ public Cliente() {
 		Usuario = usuario;
 	}
 
+	@Override
+	public String toString() {
+		return "Cliente [Cuil=" + Cuil + ", Dni=" + Dni + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Sexo="
+				+ Sexo + ", Nacionalidad=" + Nacionalidad + ", Fecha=" + Fecha + ", Direccion=" + Direccion
+				+ ", Localidad=" + Localidad + ", Provincia=" + Provincia + ", Correo=" + Correo + ", Usuario="
+				+ Usuario + ", Telefono=" + Telefono + "]";
+	}
+
 
 	}
 
