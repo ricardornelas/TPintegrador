@@ -1,2 +1,6 @@
-/daolmpl/
-/entidad/
+/DaoImpl/
+/Controlador/
+/Dao/
+/Entidad/
+/Negocio/
+/NegocioImpl/

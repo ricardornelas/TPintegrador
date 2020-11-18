@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>	
+<%@page import="Entidad.Localidad" %>	
+<%@page import="DaoImpl.LocalidadDaoImpl"%>
+<%@page import="Negocio.LocalidadNegocio"%>
+<%@ page import = "NegocioImpl.LocalidadNegocioImpl" %>
+<%@page import="Entidad.Provincia" %>
+<%@page import="DaoImpl.ProvinciaDaolmpl"%>
+<%@page import="Negocio.ProvinciaNegocio"%>
+<%@ page import = "NegocioImpl.ProvinciaNegocioImpl" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -79,7 +91,12 @@
       			<label for="inputState">Provincia</label>
     				 <select id="ddlProvincia" class="form-control">
         				<option selected>Seleccionar provincia</option>
-       					 <option>...</option>
+       					<%
+ 						ArrayList<Provincia> lista = new ProvinciaDaolmpl().readAll();
+ 							for(Provincia prov : lista){ %>
+ 						
+ 						<option value=<%=prov.getIdprovincia()%>><%=prov.getNombre() %></option>
+ 						<%}%>
       				</select>
       				</div>
 				<div class="form-group">
@@ -91,7 +108,12 @@
       			<label for="inputState">Localidad</label>
     				 <select id="ddlLocalidad" class="form-control">
         				<option selected>Seleccionar localidad</option>
-       					 <option>...</option>
+       					 <%
+ 						ArrayList<Localidad> lista2 = new LocalidadDaoImpl().readAll(request.getParameter("ddlProvincia"));
+ 							for(Localidad loc  : lista2){ %>
+ 						
+ 						<option value=<%= loc.getIdlocalidad()%>><%=loc.getNombre() %></option>
+ 						<%}%>
       				</select>
 				<div class="form-group">
 					<label>Telefono:</label>

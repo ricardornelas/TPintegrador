@@ -140,4 +140,22 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	return null;
 	}
 	
+	public boolean verificarUsuario(String Usuario) {
+		Statement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		String Buscar = "Select Usuario_Usu From Usuarios Where Usuario_Usu = '" +Usuario + "'" ;
+		boolean respuesta = false;
+		try{
+			statement = conexion.createStatement();
+			ResultSet result = statement.executeQuery(Buscar);    
+			result.next();
+         if(result.getInt(1)==0) {
+             respuesta = true;
+         }
+     } catch(Exception e){
+         System.err.print("Ha ocurrido un error: "+ e.getMessage());
+     } 
+     return respuesta;
+	}
+	
 }

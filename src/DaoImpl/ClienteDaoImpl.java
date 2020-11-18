@@ -71,7 +71,23 @@ public class ClienteDaoImpl implements ClienteDao{
 		return SeInserto;
 	}
 	
-
+	public boolean verificarCliente(String Cuil) {
+		Statement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		String Buscar = "Select Count(CUIL_Cli) From Clientes Where CUIL_Cli = '" +Cuil + "'" ;
+		boolean respuesta = false;
+		try{
+			statement = conexion.createStatement();
+			ResultSet result = statement.executeQuery(Buscar);    
+			result.next();
+         if(result.getInt(1)==0) {
+             respuesta = true;
+         }
+     } catch(Exception e){
+         System.err.print("Ha ocurrido un error: "+ e.getMessage());
+     } 
+     return respuesta;
+	}
 	
 	public ResultSet LeerClientes(){
 		

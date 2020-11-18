@@ -58,8 +58,10 @@ public class ServletCliente extends HttpServlet {
 			 
 			UsuarioDaoImpl usi = new UsuarioDaoImpl();
 			ClienteDaoImpl cdi = new ClienteDaoImpl();
+			if(cdi.verificarCliente(request.getParameter("txtCuil"))) {
 				usi.Agregar(usu);
 				cdi.Agregar(cli);
+			}
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
