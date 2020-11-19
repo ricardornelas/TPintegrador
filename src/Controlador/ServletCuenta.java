@@ -118,4 +118,10 @@ public class ServletCuenta extends HttpServlet {
 		return null;
 	}
 
+	public ArrayList<Cuenta> ListadoCuentas(){
+		ArrayList<Cuenta> lista = new CuentaNegocioImpl().CargarCuenta();
+		
+		return lista;
+	}
+	
 }

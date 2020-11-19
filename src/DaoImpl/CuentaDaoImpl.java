@@ -15,6 +15,7 @@ public class CuentaDaoImpl implements CuentaDao{
 	private static final String ConsultaContar = "SELECT COUNT(CBU_CUE) FROM cuentas";
 	private static final String BuscarCuentas = "SELECT * FROM Cuentas WHERE Cuil_Cue = ";
 	private static final String EliminarCuenta = "Update Cuentas Set Cuentas.Estado_Cue=0 Where cuentas.CBU_Cue=";
+	private static final String Listar = "SELECT * FROM Cuentas INNER JOIN TipoCuentas ON IdTipoCuenta_Cue  = IdTipoCuenta_TC  WHERE Estado_Cue = 1";
 	
 	public boolean Agregar(Cuenta cuenta) {
 		try {
@@ -151,4 +152,27 @@ public class CuentaDaoImpl implements CuentaDao{
 		
 		return SeElimino;
 	}
+	
+public ResultSet LeerCuentas(){
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		
+		Statement st;
+		
+	try {
+		st = conexion.createStatement();
+		ResultSet result = st.executeQuery(Listar);
+		return result;		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null;
+	}
+	
 }
