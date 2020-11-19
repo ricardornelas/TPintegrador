@@ -12,7 +12,7 @@ import Entidad.Provincia;
 
 public class LocalidadDaoImpl implements LocalidadDao{
 
-	private static final String readall = "Select * from localidades INNER JOIN provincias ON idprovincia_loc = idprovincia_prov WHERE idprovincia_loc = ?;";
+	private static final String readall = "Select * from Localidades INNER JOIN Provincias ON IdProvincia_loc = IdProvincia_Prov WHERE idprovincia_loc = ?;";
 	
 	@Override
 	public ArrayList<Localidad> readAll(String param) {

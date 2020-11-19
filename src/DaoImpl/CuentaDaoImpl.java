@@ -14,6 +14,7 @@ public class CuentaDaoImpl implements CuentaDao{
 	private static final String Insertar = "INSERT INTO cuentas (CBU_Cue,CUIL_Cue,FechaCreacion_Cue,IdTipoCuenta_Cue,NroCuenta_Cue,Saldo_Cue) VALUES(?, ?, ?, ?, ?, ?)";
 	private static final String ConsultaContar = "SELECT COUNT(CBU_CUE) FROM cuentas";
 	private static final String BuscarCuentas = "SELECT * FROM Cuentas WHERE Cuil_Cue = ";
+	private static final String EliminarCuenta = "Update Cuentas Set Cuentas.Estado_Cue=0 Where cuentas.CBU_Cue=";
 	
 	public boolean Agregar(Cuenta cuenta) {
 		try {
@@ -124,4 +125,30 @@ public class CuentaDaoImpl implements CuentaDao{
 	return null;
 	}
 
+	public boolean Eliminar(String cuenta) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean SeElimino = false;
+		try
+		{
+			statement = conexion.prepareStatement(EliminarCuenta+"'"+cuenta+"'");
+
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				SeElimino= true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return SeElimino;
+	}
 }

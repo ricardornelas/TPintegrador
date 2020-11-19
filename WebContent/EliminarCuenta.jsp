@@ -1,3 +1,6 @@
+<%@page import="Controlador.ServletCuenta"%>
+<%@page import="Entidad.Cuenta"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -37,19 +40,42 @@
  			 </div>
 		</div>
 	</nav>
-			<form style="text-align: center;">
-			
+			<%!ArrayList <Cuenta> listaCuentas;%>
 			<br>
-			<H1>Menu Clientes</H1>
+			<H1>Eliminar Cuenta</H1>
 			<br>
-			<div class="btn-group-vertical btn-light bg-info">
-				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCliente.jsp">Agregar Cliente</a>
-				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
-				<a style="width:300px;" class="btn btn-outline-light" href="ModificarCliente.jsp">Modificar Cliente</a>
-				<a style="width:300px;" class="btn btn-outline-light" href="EliminarCliente.jsp">Eliminar Cliente</a>
-			</div>
 			
-</form>
+			
+<div class="form-group">
+					<form action="ServletCuenta" method="Post">
+					<label>Filtrar por Cuil:</label>
+					<input type="number" name="txtCuil" class="form-control">
+					<input type="submit" name="btnFiltrarEliminar" value="Filtrar" class="btn btn-info">
+				</div>		
+			
+			<% if(request.getAttribute("listado")!=null){
+				listaCuentas = (ArrayList)request.getAttribute("listado"); 
+			} else if(listaCuentas==null){
+				listaCuentas = new ServletCuenta().CuentasXCUIL(request.getParameter("txtCuil"));
+			} %>
+			
+			</form>
+<p><p>		
+<% if(request.getAttribute("CuentaSeleccionada")!=null){
+	Cuenta aux = (Cuenta)request.getAttribute("CuentaSeleccionada");
+%>
+
+	
+<label>Cuenta: <%=aux.getCBU() + ", " + aux.getNroCuenta() +"  "+ aux.getSaldo()  %></label>			
+<br><br>
+					<label>Está seguro que desea eliminarlo?</label>
+					<br>
+					<form action="ServletCliente" method="post">
+					<input type="hidden" name="Usu" value=<%=aux.getCBU() %>>
+					<input type="submit" name="btnConfirmarEliminar" value="Aceptar">
+					<input type="submit" name="btnCancelarEliminar" value="Cancelar">
+					</form>
+<%listaCuentas = null;}%>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -26,6 +26,9 @@
       			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
+      			<li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuCuentas.jsp">Cuentas</a>
+      			</li>
     		</ul>
   		</div>
   		 <div class="dropdown">
@@ -46,7 +49,7 @@
 <div class="form-group">
 					<form action="ServletCliente" method="Post">
 					<label>Filtrar por Cuil:</label>
-					<input type="text" name="txtCuil" class="form-control">
+					<input type="number" name="txtCuil" class="form-control">
 					<input type="submit" name="btnFiltrarEliminar" value="Filtrar" class="btn btn-info">
 				</div>		
 			

@@ -1,5 +1,6 @@
 package DaoImpl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +11,6 @@ import Dao.ClienteDao;
 import Entidad.Cliente;
 import Entidad.Usuario;
 
-
-
 public class ClienteDaoImpl implements ClienteDao{
 	
 	private static final String Insertar = "INSERT INTO clientes (CUIL_Cli, DNI_Cli, Nombre_Cli, Apellido_Cli, Sexo_Cli, Nacionalidad_Cli, FechaNacimiento_Cli, Direccion_Cli, IdLocalidad_Cli, IdProvincia_Cli,"
@@ -21,6 +20,8 @@ public class ClienteDaoImpl implements ClienteDao{
 	private static final String BuscarClienteXUsuario = "SELECT CUIL_Cli,DNI_Cli,Nombre_Cli,Apellido_Cli,Sexo_Cli,Nacionalidad_Cli,FechaNacimiento_Cli,Direccion_Cli,"
 			+ "Descripcion_Loc,Descripcion_Pro,CorreoElectronico_Cli,Usuario_Cli,NroTelefono_Cli FROM clientes INNER JOIN localidades ON IdLocalidad_Loc=IdLocalidad_Cli"
 			+ " INNER JOIN provincias ON IdProvincia_Pro=IdProvincia_Cli WHERE Usuario_Cli = ";
+	private static final String delete = "UPDATE bdintegrador.Clientes SET Deleted = 1 WHERE Cuil_Cli = ?";
+	private static final String update = "UPDATE bdintegrador.Clientes SET Dni_Cli = ?, Nombre_Cli = ?, Apellido_Cli = ?, FechaNacimiento_Cli = ?, Direccion_Cli = ?, Localidad_Cli = ?, Provincia_Cli = ?, Email_Cli = ?, Telefono_Cli  = ?WHERE Cuil_Cli = ? and Deleted = 0";
 	
 	public boolean Agregar(Cliente cliente) {
 		
@@ -132,8 +133,6 @@ public class ClienteDaoImpl implements ClienteDao{
 	return null;
 	}
 
-
-
 	@Override
 	public ResultSet DevolverCliente(String Usuario) {
 		
@@ -156,4 +155,63 @@ public class ClienteDaoImpl implements ClienteDao{
 	return null;
 	}
 	
+	public boolean delete(Cliente cliente) {
+		CallableStatement cst;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try 
+		{
+			cst = conexion.prepareCall(delete);
+			cst.setString(1, cliente.getCuil());
+			if(cst.executeUpdate() > 0)
+			{
+				//onexion.commit();
+				isdeleteExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return isdeleteExitoso;
+	}
+
+	public boolean update(Cliente cliente) {
+		CallableStatement cst;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isUpdateExitoso = false;
+		try
+		{
+			
+			cst = conexion.prepareCall(update);
+			cst.setString(1, cliente.getDni()); 
+			cst.setString(2, cliente.getNombre());
+			cst.setString(3, cliente.getApellido());
+			cst.setString(4, cliente.getFecha().toString());
+			cst.setString(5, cliente.getDireccion());
+			cst.setInt(6, cliente.getLocalidad());
+			cst.setInt(7, cliente.getProvincia());
+			cst.setString(8, cliente.getCorreo());
+			cst.setString(9, cliente.getTelefono());
+			
+			if(cst.executeUpdate() > 0)
+			{
+				//conexion.commit();
+				isUpdateExitoso = true;
+			}
+			
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}		
+		return isUpdateExitoso;
+	}
 }

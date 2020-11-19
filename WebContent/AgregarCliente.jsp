@@ -35,6 +35,9 @@
       			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
+      			<li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuCuentas.jsp">Cuentas</a>
+      			</li>
     		</ul>
   		</div>
   		 <div class="dropdown">
@@ -108,12 +111,7 @@
       			<label for="inputState">Localidad</label>
     				 <select id="ddlLocalidad" class="form-control">
         				<option selected>Seleccionar localidad</option>
-       					 <%
- 						ArrayList<Localidad> lista2 = new LocalidadDaoImpl().readAll(request.getParameter("ddlProvincia"));
- 							for(Localidad loc  : lista2){ %>
- 						
- 						<option value=<%= loc.getIdlocalidad()%>><%=loc.getNombre() %></option>
- 						<%}%>
+       				
       				</select>
 				<div class="form-group">
 					<label>Telefono:</label>

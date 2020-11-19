@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import DaoImpl.ClienteDaoImpl;
 import DaoImpl.CuentaDaoImpl;
+import DaoImpl.UsuarioDaoImpl;
+import Entidad.Cliente;
 import Entidad.Cuenta;
 import Negocio.CuentaNegocio;
 
@@ -72,4 +75,27 @@ public class CuentaNegocioImpl implements CuentaNegocio{
 		return null;
 	}
 
+	public boolean EliminarCuenta(String Cuenta) {
+		return new CuentaDaoImpl().Eliminar(Cuenta); 
+	}
+	
+public ArrayList<Cuenta> CargarCuentasFiltradass(String CUIL) {
+		
+		ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
+		ResultSet RS = new CuentaDaoImpl().CuentasXCUIL(CUIL);
+		Cuenta aux = new Cuenta();
+		try {
+			while(RS.next()) {
+				aux.setCUIL(RS.getString(1));
+				aux.setCBU(RS.getString(2));
+				aux.setNroCuenta(RS.getInt(3));
+				aux.setSaldo(RS.getFloat(4));
+				lista.add(aux);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
 }

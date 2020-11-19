@@ -40,13 +40,12 @@
 			<form style="text-align: center;">
 			
 			<br>
-			<H1>Menu Clientes</H1>
+			<H1>Menu Cuentas</H1>
 			<br>
 			<div class="btn-group-vertical btn-light bg-info">
-				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCliente.jsp">Agregar Cliente</a>
-				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
-				<a style="width:300px;" class="btn btn-outline-light" href="ModificarCliente.jsp">Modificar Cliente</a>
-				<a style="width:300px;" class="btn btn-outline-light" href="EliminarCliente.jsp">Eliminar Cliente</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCuenta.jsp">Solicitar Cuenta</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="ModificarCuenta.jsp">Modificar Cuenta</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="EliminarCuenta.jsp">Eliminar Cuenta</a>
 			</div>
 			
 </form>

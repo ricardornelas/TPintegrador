@@ -28,6 +28,9 @@ table,th,td{
       			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
+      			<li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuCuentas.jsp">Cuentas</a>
+      			</li>
     		</ul>
   		</div>
   		 <div class="dropdown">

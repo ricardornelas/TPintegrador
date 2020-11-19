@@ -18,6 +18,7 @@ import Entidad.TipoDeCuenta;
 import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
 import NegocioImpl.TipoDeCuentaNegocioImpl;
+import NegocioImpl.UsuarioNegocioImpl;
 
 
 @WebServlet("/ServletCuenta")
@@ -52,6 +53,49 @@ public class ServletCuenta extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter("btnEliminar")!=null) {
+			Cuenta aux = new Cuenta();
+			try{
+				aux.setCBU((String)request.getParameter("CBU"));
+			aux.setNroCuenta((Integer.parseInt(request.getParameter("NroCuenta"))));
+			aux.setSaldo((Float.parseFloat(request.getParameter("Saldo"))));
+			
+			
+			request.setAttribute("CuentaSeleccionada", aux);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCliente.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnConfirmarEliminar")!=null) {
+
+			try {
+			String Cuenta = (String)request.getParameter("Usu");
+			new CuentaNegocioImpl().EliminarCuenta(Cuenta);
+			
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCliente.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnCancelarEliminar")!=null) {
+			
+			request.setAttribute("CuentaSeleccionada", null);
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCuenta.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnFiltrarEliminar")!=null) {
+			
+			request.setAttribute("listado", new CuentaNegocioImpl().CuentasXCUIL((String)request.getParameter("txtCuil")));
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCuenta.jsp");
+			rd.forward(request, response);
+		}
 		
 	}
 
