@@ -1,9 +1,9 @@
 package Dao;
 
-import java.util.ArrayList;
-
-import Entidad.Localidad;
+import java.sql.ResultSet;
 
 public interface LocalidadDao {
-	public ArrayList<Localidad> readAll(String param);
+
+	public ResultSet LeerLocalidades(int IdPro);
+	
 }

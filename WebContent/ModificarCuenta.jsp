@@ -6,8 +6,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
+	<style>
+	.th,td,tr{
+	text-align: center;
+	};
+	</style>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+	<script type="text/javascript">
+	$(document).ready( function () {
+	    $('#tabla').DataTable();
+	} );
+	</script>		
 		<title>Insert title here</title>
 	</head>
 <body>
@@ -44,7 +59,7 @@
 			<h1>Modificar Cuenta</h1>
 			<br>
 <div class="form-group">
-					<form action="ServletCuenta" method="Post">
+			<form action="ServletCuenta" method="Post">
 					<label>Filtrar por Cuil:</label>
 					<input type="text" name="txtCuil" class="form-control">
 					<input type="submit" name="btnFiltrarModificar" value="Filtrar" class="btn btn-info">
@@ -53,48 +68,66 @@
 			<%if(request.getAttribute("lista")!=null){
 				listaCuentas = (ArrayList)request.getAttribute("lista"); 
 			} else if(listaCuentas==null){
+				listaCuentas = null;
 				listaCuentas = new ServletCuenta().ListadoCuentas();
 			} %>
+			</form>
 			
-			<table border="1" style="width: 393px; height: 47px">
-<tr> <th><CENTER>Cuil</CENTER></th><th><CENTER>CBU</CENTER></th><th><CENTER>Nro de cuenta</CENTER></th><th><CENTER>Saldo</CENTER></th><th></th>
-	<% for(Cuenta reg:listaCuentas){ %>
-<tr> 
-	<form action="ServletCliente" method="post">
-		<td><%=reg.getCUIL() %><input type="hidden" name="CUIL" value=<%=reg.getCUIL() %>></td>
-		<td><%=reg.getCBU() %><input type="hidden" name="CBU" value=<%=reg.getCBU() %>></td>
-		<td><%=reg.getNroCuenta() %><input type="hidden" name="NroCuenta" value=<%=reg.getNroCuenta() %>></td>
-		<td><%=reg.getSaldo() %><input type="hidden" name="Saldo" value=<%=reg.getSaldo() %>> </td>
-		<td> <CENTER> <input type="submit" name="btnModificar" value="Modificar Cuenta"> </CENTER></td>
-</form>
-</tr>
-<%} %>
-
+	<table id="tabla" class="display">
+		<thead>
+			<tr> 
+				<th>CBU</th>
+				<th>Cuil</th>
+				<th>IdTipoCuenta</th>
+				<th>Nro de cuenta</th>
+				<th>Saldo</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(Cuenta reg:listaCuentas){ %>
+			<tr> 
+				<td><%=reg.getCBU() %></td>
+				<td><%=reg.getCUIL() %></td>
+				<td><%=reg.getIdTipoCuenta() %></td>
+				<td><%=reg.getNroCuenta() %></td>
+				<td><%=reg.getSaldo() %></td>
+				<td><input type="submit" name="btnModificar" value="Modificar Cuenta" onclick="window.location.href='ServletCuenta?btnModificar=1&CBU=<%=reg.getCBU()%>&Cuil=<%=reg.getCUIL()%>&IdTipoCuenta=<%=reg.getIdTipoCuenta()%>&NroCuenta=<%=reg.getNroCuenta()%>&Saldo=<%=reg.getSaldo()%>'"></td>
+			</tr>
+			<%}%>
+		</tbody>
 </table>
-		</form>	
 <p><p>		
-<% if(request.getAttribute("ClienteSeleccionado")!=null){
-	Cuenta  aux = (Cuenta)request.getAttribute("CuentaSeleccionado");
-%>
-<label>Cuenta: <%=aux.getCUIL() + ", " + aux.getCBU() +"  "+ aux.getNroCuenta() + ", " + aux.getSaldo()%></label>				
+<% if(request.getAttribute("CuentaSeleccionada")!=null){
 
-<div class="form-group">
-					<label>Nueva CBU:</label>
-					<form action="ServletCliente" method="post">
-					<input type="text" name="txtCBU" class="form-control">
-					<input type="hidden" name="Usu" value=<%=aux.getCUIL() %>>
-					<p>
+	Cuenta  aux = (Cuenta)request.getAttribute("CuentaSeleccionada");
+%>	
+	<div class="form-group">
+					<h1>Datos Anteriores: </h1><br>
+					<label>CBU: <%=aux.getCBU()%></label><br>
+					<label>CUIL: <%=aux.getCUIL()%></label><br>
+					<label>Id Tipo Cuenta: <%=aux.getIdTipoCuenta()%></label><br>
+					<label>Numero de Cuenta: <%=aux.getNroCuenta()%></label><br>
+					<label>Saldo: <%=aux.getSaldo()%></label><br><br>
 					
-					<label>Nro de cuenta:</label>
-					<input type="text" name="txtNroCuenta" class="form-control">
+					<form action="ServletCuenta" method="post">
+					<h1>Datos Nuevos: </h1><br>
+					<label>CBU: <%=aux.getCBU()%></label><input type="hidden" name="CBU" value="<%=aux.getCBU()%>"><br>
+					<label>CUIL:</label> <input type="number" name="CUIL" required value="<%=aux.getCUIL()%>"><br>
+					<label>Id Tipo Cuenta:</label><input type="number" name="IdTipoCuenta" required value="<%=aux.getIdTipoCuenta()%>"><br>
+					<label>Numero de Cuenta: <%=aux.getNroCuenta()%></label><br>
+					<label>Saldo:</label><input type="number" name="Saldo" required value="<%=aux.getSaldo()%>"><br><br>
 					<br>
 					<input type="submit" name="btnConfirmarModificar" class="btn btn-info" value = "Confirmar">
 					</form>
 					
 				</div>	
-<%} %>
+
+<%
+listaCuentas = null;} %>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

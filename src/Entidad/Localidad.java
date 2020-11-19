@@ -1,51 +1,47 @@
 package Entidad;
 
-import Entidad.Provincia;
-
 public class Localidad {
 	
-	private Provincia provincia;
-	private String idlocalidad;
-	private String nombre;
+	int IdProvLoc;
+	int IdLocalidad;
+	String Nombre;
 	
-	public Localidad(Provincia provincia, String idlocalidad, String nombre) {
+	public Localidad(){
+		
+	}
+	
+
+	public Localidad(int id,int id2, String n) {
 		super();
-		this.provincia = provincia;
-		this.idlocalidad = idlocalidad;
-		this.nombre = nombre;
+		IdProvLoc = id;
+		IdLocalidad = id2;
+		Nombre = n;
 	}
 	
-	public Localidad() {};
-
-	public Provincia getProvincia() {
-		return provincia;
+	public int getIdProvLoc() {
+		return IdProvLoc;
 	}
 
-	public void setProvincia(Provincia provincia) {
-		this.provincia = provincia;
+	public void setIdProvLoc(int idProvLoc) {
+		IdProvLoc = idProvLoc;
 	}
 
-	public String getIdlocalidad() {
-		return idlocalidad;
+	public int getIdLocalidad() {
+		return IdLocalidad;
 	}
 
-	public void setIdlocalidad(String idlocalidad) {
-		this.idlocalidad = idlocalidad;
+	public void setIdLocalidad(int idLocalidad) {
+		IdLocalidad = idLocalidad;
 	}
 
 	public String getNombre() {
-		return nombre;
+		return Nombre;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		Nombre = nombre;
 	}
 
-	@Override
-	public String toString() {
-		return "Localidad [provincia=" + provincia + ", idlocalidad=" + idlocalidad + ", nombre=" + nombre + "]";
-	}
-	
-	
-	
+
+
 }

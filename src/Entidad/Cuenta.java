@@ -12,6 +12,29 @@ public class Cuenta {
 	public Cuenta() {
 		super();
 	}
+	
+	public Cuenta(String cbu, String cuil,int IdTC,int NroC,float S) {
+		super();
+		CBU= cbu;
+		CUIL= cuil;
+		IdTipoCuenta= IdTC;
+		NroCuenta=NroC;
+		Saldo= S;
+		
+		
+	}
+	
+	
+	public Cuenta(String cBU, String cUIL, String fechaCreacion, int idTipoCuenta, int nroCuenta, float saldo) {
+		super();
+		CBU = cBU;
+		CUIL = cUIL;
+		FechaCreacion = fechaCreacion;
+		IdTipoCuenta = idTipoCuenta;
+		NroCuenta = nroCuenta;
+		Saldo = saldo;
+	}
+
 	public String getCBU() {
 		return CBU;
 	}

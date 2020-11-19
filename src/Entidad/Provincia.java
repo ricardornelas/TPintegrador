@@ -2,22 +2,24 @@ package Entidad;
 
 public class Provincia {
 	
-	private String idprovincia;
+	private int idprovincia;
 	private String nombre;
 	
 	public Provincia(){}
 
-	public Provincia(String idprovincia, String nombre) {
+
+	public Provincia(int id, String n) {
 		super();
-		this.idprovincia = idprovincia;
-		this.nombre = nombre;
+		idprovincia = id;
+		nombre = n;
 	}
 
-	public String getIdprovincia() {
+
+	public int getIdprovincia() {
 		return idprovincia;
 	}
 
-	public void setIdprovincia(String idprovincia) {
+	public void setIdprovincia(int idprovincia) {
 		this.idprovincia = idprovincia;
 	}
 

@@ -15,8 +15,12 @@ import DaoImpl.UsuarioDaoImpl;
 import Entidad.Cliente;
 import Entidad.Usuario;
 import NegocioImpl.ClienteNegocioImpl;
+import NegocioImpl.LocalidadNegocioImpl;
+import NegocioImpl.ProvinciaNegocioImpl;
 import NegocioImpl.UsuarioNegocioImpl;
-
+import Entidad
+.Provincia;
+import Entidad.Localidad;
 
 @WebServlet("/ServletCliente")
 public class ServletCliente extends HttpServlet {
@@ -29,6 +33,39 @@ public class ServletCliente extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter("btnEliminar")!=null) {
+			Cliente aux = new Cliente();
+			try{
+				aux.setCuil((String)request.getParameter("Cuil"));
+			aux.setNombre((String)request.getParameter("Nombre"));
+			aux.setApellido((String)request.getParameter("Apellido"));
+			aux.setUsuario((String)request.getParameter("Usuario"));
+			
+			request.setAttribute("ClienteSeleccionado", aux);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCliente.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnModificar")!=null) {
+			Cliente aux = new Cliente();
+			try{
+				aux.setCuil((String)request.getParameter("Cuil"));
+				aux.setNombre((String)request.getParameter("Nombre"));
+				aux.setApellido((String)request.getParameter("Apellido"));
+				aux.setUsuario((String)request.getParameter("Usuario"));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}			
+			request.setAttribute("ClienteSeleccionado", aux);
+			RequestDispatcher rd = request.getRequestDispatcher("/ModificarCliente.jsp");
+			rd.forward(request, response);
+		}
+		
 		
 		
 		if(request.getParameter("btnAgregar")!=null) {
@@ -58,35 +95,19 @@ public class ServletCliente extends HttpServlet {
 			 
 			UsuarioDaoImpl usi = new UsuarioDaoImpl();
 			ClienteDaoImpl cdi = new ClienteDaoImpl();
-			if(cdi.verificarCliente(request.getParameter("txtCuil"))) {
 				usi.Agregar(usu);
 				cdi.Agregar(cli);
-			}
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/AgregarCliente.jsp");
 			rd.forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("btnEliminar")!=null) {
-			Cliente aux = new Cliente();
-			try{
-				aux.setCuil((String)request.getParameter("Cuil"));
-			aux.setNombre((String)request.getParameter("Nombre"));
-			aux.setApellido((String)request.getParameter("Apellido"));
-			aux.setUsuario((String)request.getParameter("Usuario"));
-			
-			request.setAttribute("ClienteSeleccionado", aux);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCliente.jsp");
-			rd.forward(request, response);
-		}
+
 		
 		
 		if(request.getParameter("btnConfirmarEliminar")!=null) {
@@ -111,6 +132,7 @@ public class ServletCliente extends HttpServlet {
 		}
 		
 		if(request.getParameter("btnModificar")!=null) {
+			System.out.println("PASAMO");
 			Cliente aux = new Cliente();
 			try{
 				aux.setCuil((String)request.getParameter("Cuil"));
@@ -133,8 +155,7 @@ public class ServletCliente extends HttpServlet {
 				String Usuario = (String)request.getParameter("Usu");
 				String Contraseña = (String)request.getParameter("txtPassword");
 				new UsuarioNegocioImpl().CambiarContraseña(Usuario, Contraseña);
-				
-			}
+				}
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -164,5 +185,31 @@ public class ServletCliente extends HttpServlet {
 		
 		return lista;
 	}
+	
+	public void Prueba(Cliente reg) {
+	
+		Cliente aux = new Cliente();
+		try{
+			aux.setCuil(reg.getCuil());
+		aux.setNombre(reg.getNombre());
+		aux.setApellido(reg.getApellido());
+		aux.setUsuario(reg.getUsuario());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}			
+		System.out.println(reg.getCuil());
+		}
+	
+	public ArrayList<Provincia> Provincia() {
+		ArrayList<Provincia> lista = new ProvinciaNegocioImpl().LeerProvincias();
+		return lista;
+	}
+	
+	public ArrayList<Localidad> Localidad(int aux) {
+		ArrayList<Localidad> lista = new LocalidadNegocioImpl().LeerLocalidades(aux); //Eliminar parametros 
+		return lista;
+	}
+	
 
 }

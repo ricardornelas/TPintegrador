@@ -1,6 +1,5 @@
 package Controlador;
 
-import java.awt.Label;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +17,6 @@ import Entidad.TipoDeCuenta;
 import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
 import NegocioImpl.TipoDeCuentaNegocioImpl;
-import NegocioImpl.UsuarioNegocioImpl;
 
 
 @WebServlet("/ServletCuenta")
@@ -33,6 +31,19 @@ public class ServletCuenta extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		
+		if(request.getParameter("btnEliminar")!=null) {
+			try{
+			request.setAttribute("CuentaSeleccionada", request.getParameter("CBU"));
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCuenta.jsp");
+			rd.forward(request, response);
+		}
+		
 		if(request.getParameter("btnAgregar")!=null) {
 			
 				try{CuentaNegocioImpl Neg = new CuentaNegocioImpl();
@@ -40,6 +51,7 @@ public class ServletCuenta extends HttpServlet {
 				Cuenta cuenta = new Cuenta();
 				cuenta.setCUIL((String)request.getParameter("txtCuil"));
 				cuenta.setIdTipoCuenta(Integer.parseInt(request.getParameter("ddlTipoCuenta")));
+				cuenta.setNroCuenta(Integer.parseInt(request.getParameter("NroCuenta")));
 				cuenta.setFechaCreacion("2020-11-11");
 				Neg.Agregar(cuenta);
 				} catch(Exception e) {
@@ -49,37 +61,70 @@ public class ServletCuenta extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/AgregarCuenta.jsp");
 			rd.forward(request, response);
 		}
+		
+		if(request.getParameter("btnModificar")!=null) {
+			
+			Cuenta aux = new Cuenta();
+			try{
+				aux.setCBU(request.getParameter("CBU"));
+				aux.setCUIL(request.getParameter("Cuil"));
+				aux.setIdTipoCuenta(Integer.parseInt(request.getParameter("IdTipoCuenta")));
+				aux.setNroCuenta(Integer.parseInt(request.getParameter("NroCuenta")));
+				aux.setSaldo(Float.parseFloat(request.getParameter("Saldo")));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("CuentaSeleccionada", aux);
+			RequestDispatcher rd = request.getRequestDispatcher("/ModificarCuenta.jsp");
+			rd.forward(request, response);
+		}
+		
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter("btnEliminar")!=null) {
+		if(request.getParameter("btnAceptarEliminar")!=null) {
+			new CuentaNegocioImpl().EliminarCuenta(request.getParameter("CBU"));
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCuenta.jsp");
+			rd.forward(request, response);
+		} else if(request.getParameter("btnCancelarEliminar")!=null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCuenta.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnConfirmarModificar")!=null) {
 			Cuenta aux = new Cuenta();
 			try{
 				aux.setCBU((String)request.getParameter("CBU"));
-			aux.setNroCuenta((Integer.parseInt(request.getParameter("NroCuenta"))));
-			aux.setSaldo((Float.parseFloat(request.getParameter("Saldo"))));
+				aux.setCUIL((String)request.getParameter("CUIL"));
+				aux.setIdTipoCuenta((Integer.parseInt(request.getParameter("IdTipoCuenta"))));
+				aux.setSaldo((Float.parseFloat(request.getParameter("Saldo"))));
+
+				request.setAttribute("CuentaSeleccionada", null);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			
+			new CuentaNegocioImpl().Modificar(aux);
 			
-			request.setAttribute("CuentaSeleccionada", aux);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCliente.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/ModificarCuenta.jsp");
 			rd.forward(request, response);
 		}
+		
+		
 		
 		if(request.getParameter("btnConfirmarEliminar")!=null) {
 
 			try {
-			String Cuenta = (String)request.getParameter("Usu");
-			new CuentaNegocioImpl().EliminarCuenta(Cuenta);
+			String CBU = request.getParameter("CBU");
+			new CuentaNegocioImpl().EliminarCuenta(CBU);
 			
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCliente.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/EliminarCuenta.jsp");
 			rd.forward(request, response);
 		}
 		
@@ -119,7 +164,7 @@ public class ServletCuenta extends HttpServlet {
 	}
 
 	public ArrayList<Cuenta> ListadoCuentas(){
-		ArrayList<Cuenta> lista = new CuentaNegocioImpl().CargarCuenta();
+		ArrayList<Cuenta> lista = new CuentaNegocioImpl().LeerCuentas();
 		
 		return lista;
 	}

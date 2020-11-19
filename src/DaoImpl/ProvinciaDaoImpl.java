@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import Dao.LocalidadDao;
+import Dao.ProvinciaDao;
 
-public class LocalidadDaoImpl implements LocalidadDao{
-
-
+public class ProvinciaDaoImpl implements ProvinciaDao {
 	
-	public ResultSet LeerLocalidades(int IdPro) {
+private static final String Listar = "SELECT * FROM PROVINCIAS";
+	
+	public ResultSet LeerProvincias() {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -24,7 +24,7 @@ public class LocalidadDaoImpl implements LocalidadDao{
 		
 	try {
 		st = conexion.createStatement();
-		ResultSet result = st.executeQuery("SELECT * FROM LOCALIDADES WHERE IdProvincia_Loc ="  + IdPro);
+		ResultSet result = st.executeQuery(Listar);
 		return result;		
 	} catch (SQLException e) {
 		e.printStackTrace();

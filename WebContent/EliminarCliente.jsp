@@ -7,7 +7,17 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+	<script type="text/javascript">
+	$(document).ready( function () {
+	    $('#tabla').DataTable();
+	} );
+	</script>		
 		<title>Insert title here</title>
 	</head>
 <body>
@@ -59,20 +69,27 @@
 				listaClientes = new ServletCliente().ListadoClientes();
 			} %>
 			
-			<table border="1" style="width: 393px; height: 47px">
-<tr> <th><CENTER>Cuil</CENTER></th><th><CENTER>Nombre</CENTER></th><th><CENTER>Apellido</CENTER></th><th><CENTER>Usuario</CENTER></th><th></th>
-<% for(Cliente reg:listaClientes){ %>
-<tr> 
-	<form action="ServletCliente" method="post">
-		<td><%=reg.getCuil() %><input type="hidden" name="Cuil" value=<%=reg.getCuil() %>></td>
-		<td><%=reg.getNombre() %><input type="hidden" name="Nombre" value=<%=reg.getNombre() %>></td>
-		<td><%=reg.getApellido() %><input type="hidden" name="Apellido" value=<%=reg.getApellido() %>></td>
-		<td><%=reg.getUsuario() %><input type="hidden" name="Usuario" value=<%=reg.getUsuario() %>> </td>
-		<td> <CENTER> <input type="submit" name="btnEliminar" value="Eliminar"> </CENTER></td>
-</form>
-</tr>
-<%} %>
-</table>
+	<table id="tabla" class="display">
+		<thead>
+			<tr> 
+				<th><CENTER>Cuil</CENTER></th>
+				<th><CENTER>Nombre</CENTER></th>
+				<th><CENTER>Apellido</CENTER></th>
+				<th><CENTER>Usuario</CENTER></th>
+				<th></th>
+	<% for(Cliente reg:listaClientes){ %>
+		<tbody>
+			<tr> 
+					<td><%=reg.getCuil() %><input type="hidden" name="Cuil" value=<%=reg.getCuil() %>></td>
+					<td><%=reg.getNombre() %><input type="hidden" name="Nombre" value=<%=reg.getNombre() %>></td>
+					<td><%=reg.getApellido() %><input type="hidden" name="Apellido" value=<%=reg.getApellido() %>></td>
+					<td><%=reg.getUsuario() %><input type="hidden" name="Usuario" value=<%=reg.getUsuario() %>> </td>
+					<td><input type="submit" name="btnEliminar" value="Eliminar" onclick="window.location.href='ServletCliente?btnEliminar=1&Cuil=<%=reg.getCuil()%>&Nombre=<%=reg.getNombre()%>&Apellido=<%=reg.getApellido()%>&Usuario=<%=reg.getUsuario()%>'"></td>
+			</tr>
+		</tbody>
+	</tr>
+	<%} %>
+	</table>
 			</form>
 <p><p>		
 <% if(request.getAttribute("ClienteSeleccionado")!=null){
@@ -94,5 +111,6 @@ listaClientes = null;}%>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

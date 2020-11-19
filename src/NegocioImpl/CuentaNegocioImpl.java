@@ -1,18 +1,20 @@
 package NegocioImpl;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import DaoImpl.ClienteDaoImpl;
 import DaoImpl.CuentaDaoImpl;
-import DaoImpl.UsuarioDaoImpl;
 import Entidad.Cuenta;
 import Negocio.CuentaNegocio;
 
 public class CuentaNegocioImpl implements CuentaNegocio{
 
+	public boolean EliminarCuenta(String cbu) {
+		return new CuentaDaoImpl().Eliminar(cbu); 
+	}
+	
 	private String GenerarCBU(String NroCuenta) {
 		
 		String CBU;
@@ -73,48 +75,26 @@ public class CuentaNegocioImpl implements CuentaNegocio{
 		
 		return null;
 	}
-
-	public boolean EliminarCuenta(String Cuenta) {
-		return new CuentaDaoImpl().Eliminar(Cuenta); 
-	}
-public ArrayList<Cuenta> CargarCuenta() {
-		
+	
+	public ArrayList<Cuenta> LeerCuentas() {
 		ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
-		ResultSet RS = new CuentaDaoImpl().LeerCuentas();
 		
+		ResultSet RS = new CuentaDaoImpl().LeerCuentas();
+		///String cBU, String cUIL, String fechaCreacion, int idTipoCuenta, int nroCuenta, float saldo
 		try {
-			while (RS.next()) {
-				Cuenta aux = new Cuenta();
-				aux.setCUIL(RS.getString(1));
-				aux.setCBU(RS.getString(2));
-				aux.setNroCuenta(RS.getInt(3));
-				aux.setSaldo(RS.getFloat(4));
-				lista.add(aux);
+			while(RS.next()) {
+				Cuenta reg = new Cuenta(RS.getString("CBU_Cue"),RS.getString("CUIL_Cue"),RS.getString("FechaCreacion_Cue"),RS.getInt("IdTipoCuenta_Cue"),RS.getInt("NroCuenta_Cue"),RS.getFloat("Saldo_Cue"));
+				lista.add(reg);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-
 		return lista;
 	}
-public ArrayList<Cuenta> CargarCuentasFiltradass(String CUIL) {
-		
-		ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
-		ResultSet RS = new CuentaDaoImpl().CuentasXCUIL(CUIL);
-		Cuenta aux = new Cuenta();
-		try {
-			while(RS.next()) {
-				aux.setCUIL(RS.getString(1));
-				aux.setCBU(RS.getString(2));
-				aux.setNroCuenta(RS.getInt(3));
-				aux.setSaldo(RS.getFloat(4));
-				lista.add(aux);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return lista;
+	
+	public boolean Modificar(Cuenta cuenta) {
+		return new CuentaDaoImpl().Modificar(cuenta);
 	}
+	
 }

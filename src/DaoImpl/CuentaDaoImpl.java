@@ -14,8 +14,10 @@ public class CuentaDaoImpl implements CuentaDao{
 	private static final String Insertar = "INSERT INTO cuentas (CBU_Cue,CUIL_Cue,FechaCreacion_Cue,IdTipoCuenta_Cue,NroCuenta_Cue,Saldo_Cue) VALUES(?, ?, ?, ?, ?, ?)";
 	private static final String ConsultaContar = "SELECT COUNT(CBU_CUE) FROM cuentas";
 	private static final String BuscarCuentas = "SELECT * FROM Cuentas WHERE Cuil_Cue = ";
-	private static final String EliminarCuenta = "Update Cuentas Set Cuentas.Estado_Cue=0 Where cuentas.CBU_Cue=";
-	private static final String Listar = "SELECT * FROM Cuentas INNER JOIN TipoCuentas ON IdTipoCuenta_Cue  = IdTipoCuenta_TC  WHERE Estado_Cue = 1";
+	private static final String EliminarCuenta = "Update cuentas Set cuentas.Estado_Cue=0 Where cuentas.CBU_Cue=";
+	private static final String Listar = "SELECT * FROM CUENTAS WHERE Estado_Cue=1";
+	private static final String ModificarCuenta = "UPDATE cuentas SET CUIL_Cue=?, IdTipoCuenta_Cue=?,Saldo_Cue=? WHERE CBU_Cue=?";
+;
 	
 	public boolean Agregar(Cuenta cuenta) {
 		try {
@@ -126,14 +128,14 @@ public class CuentaDaoImpl implements CuentaDao{
 	return null;
 	}
 
-	public boolean Eliminar(String cuenta) {
+	public boolean Eliminar(String CBU) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean SeElimino = false;
+		
 		try
 		{
-			statement = conexion.prepareStatement(EliminarCuenta+"'"+cuenta+"'");
-
+			statement = conexion.prepareStatement(EliminarCuenta+"'"+CBU+"'");
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -153,7 +155,7 @@ public class CuentaDaoImpl implements CuentaDao{
 		return SeElimino;
 	}
 	
-public ResultSet LeerCuentas(){
+public ResultSet LeerCuentas() {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -174,5 +176,36 @@ public ResultSet LeerCuentas(){
 	}
 	return null;
 	}
+
+public boolean Modificar(Cuenta cuenta) {
+	PreparedStatement statement;
+	Connection conexion = Conexion.getConexion().getSQLConexion();
+	boolean SeModifico = false;
+	try
+	{
+		statement = conexion.prepareStatement(ModificarCuenta);
+		statement.setString(1, cuenta.getCUIL());
+		statement.setInt(2, cuenta.getIdTipoCuenta());
+		statement.setFloat(3, cuenta.getSaldo());
+		statement.setString(4, cuenta.getCBU());
+		if(statement.executeUpdate() > 0)
+		{
+			conexion.commit();
+			SeModifico= true;
+		}
+	} 
+	catch (SQLException e) 
+	{
+		e.printStackTrace();
+		try {
+			conexion.rollback();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	return SeModifico;
+}
+
 	
 }
