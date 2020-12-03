@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    <%@page import="java.util.ArrayList"%>
+<%@page import="Entidad.Cuenta"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<html>
@@ -42,22 +45,28 @@
 			<br>
 			
 			<div class="form-group">
-					<label>Monto Solicitado:</label>
-					<input type="text" name="txtMonto" class="form-control">
+					<label>CBU:</label>
+					<input type="number" name="txtCBU" class="form-control">
 				</div>
 				
+			<div class="form-group">
+					<label>Monto Solicitado:</label>
+					<input type="number" name="txtMonto" class="form-control">
+				</div>
+		<label for="start">Fecha de prestamo :</label>
+				<br>
+				<input type="date" name="FechaPrestamo" min="2020-12-03" max="2021-12-03" required >
 <div class="form-group">
-
 					<label>Cuotas:</label>
 					 <select id="ddlCuotas" class="form-control">
         				<option selected>Seleccionar Cuotas</option>
+        				<option value="3">3</option>
+        				<option value="6">6</option>
+        				<option value="9">9</option>
+        				<option value="12">12</option>
       				</select>
 				</div>
-					
-      			 <label>CBU:</label>
-					<input type="text" name="txtCbu" class="form-control">
-				
-				
+
 			<br><br>
 				<input type = "submit" name="btnSolicitud" value="Enviar Solicitud" class="btn btn-info">
 			

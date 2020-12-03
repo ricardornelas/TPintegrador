@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DaoImpl.ClienteDaoImpl;
 import DaoImpl.UsuarioDaoImpl;
@@ -33,6 +34,8 @@ public class ServletCliente extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
 		
 		if(request.getParameter("btnEliminar")!=null) {
 			Cliente aux = new Cliente();
@@ -96,6 +99,7 @@ public class ServletCliente extends HttpServlet {
 			UsuarioDaoImpl usi = new UsuarioDaoImpl();
 			ClienteDaoImpl cdi = new ClienteDaoImpl();
 				usi.Agregar(usu);
+				session.setAttribute("RespuestaSql", cdi.Agregar(cli));
 				cdi.Agregar(cli);
 			} catch(Exception e) {
 				e.printStackTrace();

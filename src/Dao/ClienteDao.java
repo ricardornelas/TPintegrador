@@ -10,4 +10,5 @@ public interface ClienteDao {
 	public ResultSet LeerClientes();
 	public ResultSet LeerClientesCUIL(String CUIL);
 	public ResultSet DevolverCliente(String Usuario);
+	public Cliente BuscarUsuario(Cliente cli);
 }

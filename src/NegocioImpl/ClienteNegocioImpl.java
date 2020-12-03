@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import DaoImpl.ClienteDaoImpl;
 import Entidad.Cliente;
 import Negocio.ClienteNegocio;
+import Dao.ClienteDao;
 
 public class ClienteNegocioImpl implements ClienteNegocio{
 
+	private ClienteDao pdao = new ClienteDaoImpl();
 	
 	public boolean Agregar(Cliente cliente) {
 		
@@ -86,4 +88,13 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		return new ClienteDaoImpl().DevolverCliente(Usuario);
 	}
 
+	public Cliente BuscarUsuario(Cliente cli) {
+		   if(cli.getUsuario().trim().length()> 0)
+	        {
+	            return pdao.BuscarUsuario(cli);
+	        }
+
+	        return null;
+	}
+	
 }

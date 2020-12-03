@@ -1,11 +1,13 @@
 package NegocioImpl;
 
+import Dao.UsuarioDao;
 import DaoImpl.UsuarioDaoImpl;
 import Entidad.Usuario;
 import Negocio.UsuarioNegocio;
 
 public class UsuarioNegocioImpl implements UsuarioNegocio{
-
+	
+	private UsuarioDao pdao = new UsuarioDaoImpl();
 
 	public boolean EliminarUsuario(String Usuario) {
 		return new UsuarioDaoImpl().Eliminar(Usuario); 

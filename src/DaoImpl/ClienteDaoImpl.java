@@ -214,4 +214,54 @@ public class ClienteDaoImpl implements ClienteDao{
 		}		
 		return isUpdateExitoso;
 	}
+
+	public Cliente BuscarUsuario(Cliente cli) {
+		// Traer usuario completo - para perfil 
+		
+		
+					try {
+						Class.forName("com.mysql.jdbc.Driver");
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+
+				
+					try {
+						Connection conexion = Conexion.getConexion().getSQLConexion();
+						Statement st = conexion.createStatement();
+
+						ResultSet rs = st.executeQuery("Select * from usuarios");
+						while (rs.next()) {
+							
+							if(rs.getString("Usuario_Cli").equals(cli.getNombre()))
+							{
+								cli.setCuil(rs.getString("CUIL_Cli"));
+								cli.setDni(rs.getString("DNI_CLI"));
+								
+								cli.setNombre(rs.getString("Usuario_Cli"));
+								cli.setNombre(rs.getString("Nombre_Cli"));
+								cli.setApellido(rs.getString("Apellido_Cli"));
+								cli.setSexo(rs.getInt("Sexo_Cli"));
+								cli.setNacionalidad(rs.getString("Nacionalidad_cli"));
+								cli.setDireccion(rs.getString("Direccion_cli"));
+								cli.setLocalidad(rs.getInt("Localidad_cli"));
+								cli.setProvincia(rs.getInt("Provincia_cli"));
+								cli.setFecha(rs.getString("Fecha_Nacimiento_cli"));
+								cli.setTelefono(rs.getString("Telefono_cli"));
+								cli.setCorreo(rs.getString("Mail_cli"));
+								
+							}
+							
+
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+
+					}
+					return cli;
+				}
+
+	
 }
