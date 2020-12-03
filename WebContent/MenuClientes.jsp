@@ -44,9 +44,9 @@
 			<br>
 			<div class="btn-group-vertical btn-light bg-info">
 				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCliente.jsp">Agregar Cliente</a>
-				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
 				<a style="width:300px;" class="btn btn-outline-light" href="ModificarCliente.jsp">Modificar Cliente</a>
 				<a style="width:300px;" class="btn btn-outline-light" href="EliminarCliente.jsp">Eliminar Cliente</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="ListadoClientes.jsp">Listar Clientes</a>
 			</div>
 			
 </form>

@@ -27,5 +27,24 @@ public class ProvinciaNegocioImpl implements ProvinciaNegocio{
 		
 		return lista;
 	}
+
+	@Override
+	public String NombreProvincia(int IdProvincia) {
+		
+		ArrayList<Provincia> lista = new ArrayList<Provincia>();
+		
+		ResultSet RS = new ProvinciaDaoImpl().LeerProvincias();
+		
+		try {
+			while(RS.next()) {
+				if(RS.getInt("IdProvincia_Pro")==IdProvincia) return RS.getString("Descripcion_Pro");
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }

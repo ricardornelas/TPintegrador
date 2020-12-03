@@ -14,6 +14,7 @@ import com.mysql.cj.Session;
 
 import Entidad.Cliente;
 import Entidad.Usuario;
+import Excepciones.LoginIncorrecto;
 import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.UsuarioNegocioImpl;
 
@@ -35,24 +36,22 @@ public class ServletUsuario extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
 			
 		if(request.getParameter("btnLogin")!=null) {
 			String Usuario = request.getParameter("txtUsuario");
 			String Contraseña = request.getParameter("txtPassword");
+			String Mensaje=null;
 			try{
 				if(new UsuarioNegocioImpl().ValidarLogin(Usuario, Contraseña)) {
 				Usuario Usu = new UsuarioNegocioImpl().DevolverUsuario(Usuario);
 				request.setAttribute("UsuarioConectado", Usu);
 				}
-			} catch(Exception e) {
-				e.printStackTrace();
+			} catch(LoginIncorrecto e) {
+				Mensaje = e.getMessage();
 			}
+			request.setAttribute("Mensaje", Mensaje);
 		}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
 		rd.forward(request, response);
 	}

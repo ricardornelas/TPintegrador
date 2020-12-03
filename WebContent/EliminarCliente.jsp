@@ -5,6 +5,11 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<style>
+td,th,tr{
+text-align: center;
+}
+</style>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -50,67 +55,77 @@
  			 </div>
 		</div>
 	</nav>
-			<%!ArrayList <Cliente> listaClientes;%>
 			<br>
 			<H1>Eliminar Usuario</H1>
 			<br>
 			
+			<%
+				ArrayList <Cliente >listaClientes = new ServletCliente().ListadoClientes();
+			%>
 			
-<div class="form-group">
-					<form action="ServletCliente" method="Post">
-					<label>Filtrar por Cuil:</label>
-					<input type="number" name="txtCuil" class="form-control">
-					<input type="submit" name="btnFiltrarEliminar" value="Filtrar" class="btn btn-info">
-				</div>		
-			
-			<% if(request.getAttribute("listado")!=null){
-				listaClientes = (ArrayList)request.getAttribute("listado"); 
-			} else if(listaClientes==null){
-				listaClientes = new ServletCliente().ListadoClientes();
-			} %>
-			
-	<table id="tabla" class="display">
-		<thead>
-			<tr> 
-				<th><CENTER>Cuil</CENTER></th>
-				<th><CENTER>Nombre</CENTER></th>
-				<th><CENTER>Apellido</CENTER></th>
-				<th><CENTER>Usuario</CENTER></th>
-				<th></th>
+<table id="tabla" class="display">
+	<thead>
+		<tr> 
+			<th>Cuil</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Usuario</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
 	<% for(Cliente reg:listaClientes){ %>
-		<tbody>
 			<tr> 
-					<td><%=reg.getCuil() %><input type="hidden" name="Cuil" value=<%=reg.getCuil() %>></td>
-					<td><%=reg.getNombre() %><input type="hidden" name="Nombre" value=<%=reg.getNombre() %>></td>
-					<td><%=reg.getApellido() %><input type="hidden" name="Apellido" value=<%=reg.getApellido() %>></td>
-					<td><%=reg.getUsuario() %><input type="hidden" name="Usuario" value=<%=reg.getUsuario() %>> </td>
-					<td><input type="submit" name="btnEliminar" value="Eliminar" onclick="window.location.href='ServletCliente?btnEliminar=1&Cuil=<%=reg.getCuil()%>&Nombre=<%=reg.getNombre()%>&Apellido=<%=reg.getApellido()%>&Usuario=<%=reg.getUsuario()%>'"></td>
+				<td><%=reg.getCuil() %><input type="hidden" name="Cuil" value=<%=reg.getCuil() %>></td>
+				<td><%=reg.getNombre() %><input type="hidden" name="Nombre" value=<%=reg.getNombre() %>></td>
+				<td><%=reg.getApellido() %><input type="hidden" name="Apellido" value=<%=reg.getApellido() %>></td>
+				<td><%=reg.getUsuario() %><input type="hidden" name="Usuario" value=<%=reg.getUsuario() %>> </td>
+				<td style="width: 1px"><input type="submit" name="btnEliminar" value="Eliminar" onclick="window.location.href='ServletCliente?btnEliminar=1&Cuil=<%=reg.getCuil()%>&Nombre=<%=reg.getNombre()%>&Apellido=<%=reg.getApellido()%>&Usuario=<%=reg.getUsuario()%>'"></td>
 			</tr>
-		</tbody>
-	</tr>
 	<%} %>
-	</table>
-			</form>
+	</tbody>
+</table>
 <p><p>		
 <% if(request.getAttribute("ClienteSeleccionado")!=null){
 	Cliente aux = (Cliente)request.getAttribute("ClienteSeleccionado");
 %>
-
-	
 <label>Cliente: <%=aux.getCuil() + ", " + aux.getNombre() +"  "+ aux.getApellido() + ", " + aux.getUsuario()%></label>			
-<br><br>
+
+<div class="form-group">
 					<label>Está seguro que desea eliminarlo?</label>
-					<br>
 					<form action="ServletCliente" method="post">
 					<input type="hidden" name="Usu" value=<%=aux.getUsuario() %>>
 					<input type="submit" name="btnConfirmarEliminar" value="Aceptar">
 					<input type="submit" name="btnCancelarEliminar" value="Cancelar">
 					</form>
-<%
-listaClientes = null;}%>
+<%}%>
+					
+				<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel"><%if(request.getAttribute("Exito")!=null){ %>Exito<%} else { %>Error <%} %></h5>
+				      </div>
+				      <div class="modal-body">
+				        <%=request.getAttribute("Mensaje") %>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<%if(request.getAttribute("Mensaje")!=null){%>
+		<script>
+			$(document).ready(function(){
+			  $("#myModal").modal("show");
+			});
+		</script>
+	<%} %>
 </body>
 </html>

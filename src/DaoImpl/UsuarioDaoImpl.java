@@ -16,6 +16,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	private static final String EliminarUsuario = "Update usuarios Set usuarios.Estado_Usu=0 Where usuarios.Usuario_Usu=";
 	private static final String CambiarContraseña = "Update usuarios Set Contraseña_Usu=? Where Usuario_Usu=?";
 	private static final String BuscarUsuario = "SELECT * FROM Usuarios WHERE Estado_Usu = true AND Usuario_Usu = ";
+	private static final String Listar = "SELECT * FROM Usuarios";
 	
 	public boolean Agregar(Usuario usuario) {
 		 
@@ -135,7 +136,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		
 		return aux;	
 	} catch (SQLException e) {
-		e.printStackTrace();
+
 	}
 	return null;
 	}
@@ -156,6 +157,28 @@ public class UsuarioDaoImpl implements UsuarioDao{
          System.err.print("Ha ocurrido un error: "+ e.getMessage());
      } 
      return respuesta;
+	}
+	@Override
+	public ResultSet LeerUsuarios(){
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		
+		Statement st;
+		
+	try {
+		st = conexion.createStatement();
+		ResultSet result = st.executeQuery(Listar);
+		return result;		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null;
 	}
 	
 }

@@ -1,12 +1,17 @@
 package NegocioImpl;
-
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import DaoImpl.ClienteDaoImpl;
 import DaoImpl.CuentaDaoImpl;
+import DaoImpl.MovimientoDaoImpl;
+import Entidad.Cliente;
 import Entidad.Cuenta;
+import Entidad.Movimiento;
+import Excepciones.CUILInexistente;
+import Excepciones.LimiteCuentas;
 import Negocio.CuentaNegocio;
 
 public class CuentaNegocioImpl implements CuentaNegocio{
@@ -33,14 +38,35 @@ public class CuentaNegocioImpl implements CuentaNegocio{
 		return CBU;
 	}
 	
+	public String ValidarCuenta(Cuenta cuenta) throws LimiteCuentas, CUILInexistente{
+		if(!new ClienteDaoImpl().verificarCliente(cuenta.getCUIL()))
+			throw new CUILInexistente();
+		
+		if(new CuentaDaoImpl().CantidadDeCuentas(cuenta.getCUIL())==3)
+			throw new LimiteCuentas();
+		
+		return null;
+	}
+
+	
 	@Override
-	public boolean Agregar(Cuenta cuenta) {
+	public String Agregar(Cuenta cuenta) {
+		
+		String Mensaje = null;
+		try{
+			ValidarCuenta(cuenta);
+		} catch(LimiteCuentas e){
+			Mensaje = e.getMessage();
+			return Mensaje;
+		} catch(CUILInexistente e) {
+			Mensaje = e.getMessage();
+			return Mensaje;
+		}
 		
 		CuentaDaoImpl dao = new CuentaDaoImpl();
 		
-		if (dao.CantidadDeCuentas(cuenta.getCUIL())>=3) return false;
 		
-		///TODO: MOVIMIENTO DE $10000
+		
 		cuenta.setSaldo(10000);
 		
 		
@@ -48,18 +74,31 @@ public class CuentaNegocioImpl implements CuentaNegocio{
 		
 		cuenta.setEstado(true);
 		cuenta.setCBU(GenerarCBU(Integer.toString(NroCuenta)));
+		cuenta.setNroCuenta(NroCuenta);
 		
+		Movimiento mov = new Movimiento();
+		mov.setCBUDestinatario_Mov(cuenta.getCBU());
+		mov.setFecha(cuenta.getFechaCreacion());
+		mov.setIdTipoMovimiento_Mov(1);
+		mov.setMonto_Mov(10000);
+		mov.setCBURemitente_Mov(null);
 		
-		return dao.Agregar(cuenta);
+		if(!new MovimientoDaoImpl().Agregar(mov)) {
+			return null;
+		}
+		if(!dao.Agregar(cuenta)) {
+			Mensaje += "No se pudo agregar la cuenta"; 
+		}
+		return Mensaje;
 	}
 
 	@Override
 	public ArrayList<Cuenta> CuentasXCUIL(String CUIL) {
 		ResultSet RS = new CuentaDaoImpl().CuentasXCUIL(CUIL);
 		ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
-		Cuenta aux=new Cuenta();
 		try {
 			while(RS.next()) {
+				Cuenta aux=new Cuenta();
 				aux.setCBU(RS.getString(1));
 				aux.setCUIL(RS.getString(2));
 				aux.setFechaCreacion(RS.getString(3));
@@ -95,6 +134,48 @@ public class CuentaNegocioImpl implements CuentaNegocio{
 	
 	public boolean Modificar(Cuenta cuenta) {
 		return new CuentaDaoImpl().Modificar(cuenta);
+	}
+
+	@Override
+	public int CantidadDeCajasDeAhorro() {
+		ResultSet rs = new CuentaDaoImpl().LeerCuentas();
+		int c=0;
+		try {
+			while(rs.next()) {
+				if(rs.getBoolean("Estado_Cue")&&rs.getInt("IdTipoCuenta_Cue")==1) c++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+
+	@Override
+	public int CantidadDeCuentasCorrientes() {
+		ResultSet rs = new CuentaDaoImpl().LeerCuentas();
+		int c=0;
+		try {
+			while(rs.next()) {
+				if(rs.getBoolean("Estado_Cue")&&rs.getInt("IdTipoCuenta_Cue")==2) c++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+	
+	public boolean SaldoSuficiente(float Monto, String CBU) {
+		ResultSet rs = new CuentaDaoImpl().LeerCuentas();
+		try {
+			while(rs.next()) {
+				if(rs.getString("CBU_Cue").compareTo(CBU)==0) {
+					if(rs.getFloat("Saldo_Cue")>=Monto) return true; else return false;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }

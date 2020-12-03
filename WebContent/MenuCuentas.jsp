@@ -43,9 +43,10 @@
 			<H1>Menu Cuentas</H1>
 			<br>
 			<div class="btn-group-vertical btn-light bg-info">
-				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCuenta.jsp">Solicitar Cuenta</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="AgregarCuenta.jsp">Agregar Cuenta</a>
 				<a style="width:300px;" class="btn btn-outline-light" href="ModificarCuenta.jsp">Modificar Cuenta</a>
 				<a style="width:300px;" class="btn btn-outline-light" href="EliminarCuenta.jsp">Eliminar Cuenta</a>
+				<a style="width:300px;" class="btn btn-outline-light" href="ListadoCuentas.jsp">Listar Cuentas</a>
 			</div>
 			
 </form>

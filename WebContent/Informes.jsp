@@ -1,3 +1,8 @@
+<%@page import="Controlador.ServletCuenta"%>
+    <%@page import="Entidad.Provincia" %>
+    <%@page import="java.util.ArrayList"%>
+    <%@page import="Controlador.ServletCliente"%>
+    
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,7 +21,7 @@ text-align: center;
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">		
-		<title>Insert title here</title>
+		<title>Informes y Estadisticas</title>
 	</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
@@ -50,54 +55,47 @@ text-align: center;
 	</nav>
 			<form>
 			
-			<br><br><br><br>
+			<br><br>
 
 			<H1><b>Informes y Estadisticas</b></H1>
-
-			<br>
-			<h3>Préstamos por año</h3>
-			Filtrar año: <input type="text"> <input type="submit" value="Filtrar"> <input type="submit" value="Quitar filtro">
-			<table>
-			<thead>
-				<tr>
-					<th>Año</th>
-					<th>Dinero prestado</th>
-					<th>Dinero recaudado</th>
-					<th>Ganancia total</th>
-				</tr>
-			</thead>
-			<tr>
-					<td> </td>
-					<td>$ </td>
-					<td>$ </td>
-					<td>$ </td>
-				</tr>
-			</table>
 			
-			<br><br><br>
+			<br><br>
 			
 			<h3>Cantidad de Cajas de Ahorro y Cuentas Corrientes</h3>
+			<%
+				int CajasAhorro = new ServletCuenta().CantidadCajasDeAhorro(), CuentasCorriente = new ServletCuenta().CantidadCuentasCorrientes();
+				int total = CajasAhorro + CuentasCorriente;
+				
+			%>
 			<table>
-			<thead>
-				<tr>
-					<th style="width:90px;"></th>
-					<th>Cajas de Ahorro</th>
-					<th>Cuentas Corrientes</th>
-				</tr>
-			</thead>
-				<tr>
-					<td><b>Cantidad</b></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td><b>Porcentaje</b></td>
-					<td>%</td>
-					<td>%</td>
-				</tr>
+				<thead>
+					<tr>
+						<th style="width:90px;"></th>
+						<th>Cajas de Ahorro</th>
+						<th>Cuentas Corrientes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><b>Cantidad</b></td>
+						<td><%=CajasAhorro%></td>
+						<td><%=CuentasCorriente%></td>
+					</tr>
+					<tr>
+						<td><b>Porcentaje</b></td>
+						<td><%=((float)CajasAhorro/total)*100%> %</td>
+						<td><%=((float)CuentasCorriente/total)*100%> %</td>
+					</tr>
+				</tbody>
 			</table>
 			
 			<br><br><br>
+			
+			<%ArrayList<Provincia> lista = new ServletCliente().Provincia(); 
+			int Total= new ServletCliente().ClientesTotales();
+			int i;
+			%>
+	
 			
 			<h3>Cantidad de Clientes por Provincia</h3>
 			<table>
@@ -108,11 +106,13 @@ text-align: center;
 					<th>Porcentaje</th>
 				</tr>
 			</thead>
+			<%for(Provincia reg:lista){ %>
 				<tr>
-					<td></td>
-					<td></td>
-					<td>%</td>
+					<td><%=reg.getNombre() %></td>
+					<td><%= i= new ServletCliente().ClientesPorProvincia(reg.getIdprovincia()) %></td>
+					<td><%=((float)i/Total)*100%> %</td>
 				</tr>
+				<%}%>
 			</table>
 		
 </form>

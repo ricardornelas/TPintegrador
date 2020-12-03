@@ -1,6 +1,7 @@
 package Controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import DaoImpl.UsuarioDaoImpl;
 import Entidad.Usuario;
+import NegocioImpl.UsuarioNegocioImpl;
 
 /**
  * Servlet implementation class ServletAdministrador
@@ -39,12 +41,26 @@ public class ServletAdministrador extends HttpServlet {
 		usu.setNombreU(request.getParameter("txtUsuario"));
 		usu.setContraseña(request.getParameter("txtPassword"));
 		usu.setEsAdmin(true);
-		 
-		UsuarioDaoImpl usi = new UsuarioDaoImpl();
-		usi.Agregar(usu);
-	}
+		ArrayList<String> Mensajes = new UsuarioNegocioImpl().VerificarUsuario(usu);
+		if(usu.getContraseña().compareTo(request.getParameter("txtRepPassword"))!=0) {
+			Mensajes.add("Las contraseñas no son iguales");
+		}
+		if(Mensajes.isEmpty()) {
+			if(new UsuarioNegocioImpl().AgregarUsuario(usu)) {
+				Mensajes.add("Se agrego exitosamente");
+				request.setAttribute("Mensajes", Mensajes);
+				request.setAttribute("Exito", true);
+			} else {
+				Mensajes.add("No se pudo agregar");
+				request.setAttribute("Mensajes", Mensajes);				
+			}
+		} else {
+			request.setAttribute("Mensajes", Mensajes);
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/AgregarAdministrador.jsp");
 		rd.forward(request, response);
+	}
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="NegocioImpl.ProvinciaNegocioImpl"%>
 <%@page import="Entidad.Provincia"%>
 <%@page import="NegocioImpl.LocalidadNegocioImpl"%>
@@ -28,6 +29,9 @@
       			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Informes.jsp">Informes</a>
       			</li>
+      			<li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MenuCuentas.jsp">Cuentas</a>
+      			</li>
     		</ul>
   		</div>
   		 <div class="dropdown">
@@ -44,29 +48,7 @@
 			<form action = "ServletCliente" method ="get">
 		
 		<h1>NUEVO CLIENTE</h1>
-			<%
-			HttpSession sessionAl = request.getSession();
-		if (sessionAl.getAttribute("RespuestaSql") != null) {
-			if ((boolean) sessionAl.getAttribute("RespuestaSql")) {
-		%>
-		<div class="alert alert-dismissible alert-success">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			Cliente agregado con exito
-		</div>
-		<%
-			} else {
-		%>
-		<div class="alert alert-dismissible alert-primary">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			Error al agregar cliente
-		</div>
-
-		<%
-			}
-
-		sessionAl.removeAttribute("RespuestaSql");
-		}
-		%>
+			
 				<div class="form-group">
 					<label>Nombre:</label>
 					<input type="text" name="txtNombre" required class="form-control">
@@ -84,19 +66,17 @@
 					<input type="text" name="txtCuil" required class="form-control">
 				</div>
 				<div class="form-check form-check-inline">
-				<label>SEXO:     </label>
- 				 <input class="form-check-input" type="radio" name="RadioGenero" required value="0">
- 				 <label class="form-check-label" for="inlineRadio1">Masculino</label>
-				</div>
-				<div class="form-check form-check-inline">
+				<label>SEXO:</label>
+ 				  <input class="form-check-input" type="radio" name="RadioGenero" required value="0">
+ 				 <label class="form-check-label" for="inlineRadio1">Masculino    </label>
 			
- 				 <input class="form-check-input" type="radio" name="RadioGenero"  required value="1">
+ 				 <input class="form-check-input" type="radio" name="RadioGenero" required value="1">
   				<label class="form-check-label" for="inlineRadio2">Femenino</label>
 				</div>
 				<br>
 				<label for="start">Fecha de nacimiento :</label>
 				<br>
-				<input type="date" name="FechaNac" min="1901-01-01" max="2018-12-31" required >
+				<input type="date" name="FechaNac" min="1901-01-01" max="2018-12-31" required>
 				
 				<div class="form-group">
 					<label>Nacionalidad:</label>
@@ -104,9 +84,10 @@
 				</div>
 				<div class="form-group">
       			<label for="inputState">Provincia</label>
-    				 <select name="ddlProvincia" onchange="window.location.href='ServletCliente?ddlProvincia='+this.value" required class="form-control">
+      			
+    				 <select name="ddlProvincia" class="form-control" required>
         				
-        				<option selected disabled value =0 >Seleccionar provincia</option>
+        				<option selected disabled value ="" >Seleccionar provincia</option>
         				
        					<% ServletCliente controlador = new ServletCliente();
         				
@@ -119,63 +100,90 @@
       					%>
       				</select>
       				</div>
-      				
-				<div class="form-group">
-					<label>Direccion:</label>
-					<input type="text" name="txtDireccion"  class="form-control">
-				</div>
-				
+
 				<div class="form-group">
       			<label for="inputState">Localidad</label>
-    				 <select name="ddlLocalidad"  required class="form-control">
-        				<option selected disabled>Seleccionar localidad</option>
+    				 <select name="ddlLocalidad"  class="form-control" required>
+        				<option selected disabled value="">Seleccionar localidad</option>
        					 
-       					 <% if(request.getParameter("ddlProvincia")!=null){
-       					 
+       					 <%
        					   ServletCliente controlador2 = new ServletCliente();
         				
-      						for(Localidad aux : controlador2.Localidad(Integer.parseInt(request.getParameter("ddlProvincia")))){
+      						for(Localidad aux : controlador2.Localidad()){
       					   %>
 	      					<option value=<%=aux.getIdLocalidad()%>><%=aux.getNombre()%></option>
       					<%
       						}
-       					 }
       					%>
       				</select>
+      			</div>
+      				
+				<div class="form-group">
+					<label>Direccion:</label>
+					<input type="text" name="txtDireccion"  class="form-control" required>
+				</div>
+				
 				<div class="form-group">
 					<label>Telefono:</label>
-					<input type="number" name="txtTelefono" class="form-control">
+					<input type="number" name="txtTelefono" class="form-control" required>
 				</div>
 				<div class="form-group">
 					<label>Nombre de usuario:</label>
-					<input type="text" name="txtUsuario"  required  class="form-control" >
+					<input type="text" name="txtUsuario"  required  class="form-control" required >
 				</div>
 				<div class="form-group">
 					<label>Correo electronico:</label>
-					<input type="email" name="txtEmail" required class="form-control">
+					<input type="email" name="txtEmail" required class="form-control" required>
 				</div>
 			<div class="form-group">
 					<label>Contraseña:</label>
-					<input type="password" name="txtPassword" required class="form-control">
+					<input type="password" name="txtPassword" required class="form-control" required>
 				</div>
 												<div class="form-group">
 					<label>Repetir Contraseña:</label>
-					<input type="password" name="txtRepPassword" required class="form-control">
+					<input type="password" name="txtRepPassword" required class="form-control" required>
 				</div>
 				
 				<br><br>
-				<input type = "submit" name="btnAgregar" value="Agregar" class="btn btn-info">
-						
+				<input type = "submit" name="btnAgregar" value="Agregar" class="btn btn-info" >
 			</form>
-	
-		
 		</div>
-		
 	</div>
-	
-
+										
+										<!-- MODEL -->
+										
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel"><%if(request.getAttribute("Exito")!=null){ %>Exito<%} else { %>Error <%} %></h5>
+				      </div>
+				      <div class="modal-body">
+				      	<%if(request.getAttribute("Mensajes")!=null){
+				      		ArrayList<String> Lista = (ArrayList<String>)request.getAttribute("Mensajes");
+				      		for(String Mensaje : Lista){
+				      	%>
+				        <%=Mensaje%>
+				        <br>
+				        <%}}%>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+	<%if(request.getAttribute("Mensajes")!=null){ %>
+<script>
+$(document).ready(function(){
+  $("#myModal").modal("show");
+});
+</script>
+<%} %>
 </body>
 </html>

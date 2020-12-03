@@ -18,7 +18,7 @@
 	    $('#tabla').DataTable();
 	} );
 	</script>		
-		<title>Insert title here</title>
+		<title>Eliminar Cuenta</title>
 	</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
@@ -60,8 +60,8 @@
 					<tr>
 						<th>CBU</th>
 						<th>CUIL</th>
-						<th>Id Tipo Cuenta</th>
-						<th>Numero Cuenta</th>
+						<th>Tipo de Cuenta</th>
+						<th>Numero de Cuenta</th>
 						<th>Fecha de Creacion</th>
 						<th>Saldo</th>
 						<th></th>
@@ -73,7 +73,13 @@
 					<tr>
 						<td><%= reg.getCBU()%></td>
 						<td><%= reg.getCUIL()%></td>
-						<td><%= reg.getIdTipoCuenta()%></td>
+						<td>
+						<%if(reg.getIdTipoCuenta()==1){ %>
+						Caja de Ahorro
+						<%} else {%>
+						Cuenta Corriente
+						<%} %>
+						</td>
 						<td><%= reg.getNroCuenta()%></td>
 						<td><%= reg.getFechaCreacion()%></td>
 						<td><%= reg.getSaldo()%></td>
@@ -94,10 +100,35 @@
 <%} listaCuentas=null;%>
 
 
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel"><%if(request.getAttribute("Exito")!=null){ %>Exito<%} else { %>Error <%} %></h5>
+				      </div>
+				      <div class="modal-body">
+				        <%=request.getAttribute("Mensaje") %>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<%if(request.getAttribute("Mensaje")!=null){ %>
+<script>
+$(document).ready(function(){
+  $("#myModal").modal("show");
+});
+</script>
+<%} %>
+
 </body>
 </html>

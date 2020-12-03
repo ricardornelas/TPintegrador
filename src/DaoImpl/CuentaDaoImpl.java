@@ -74,7 +74,7 @@ public class CuentaDaoImpl implements CuentaDao{
 		
 	try {
 		st = conexion.createStatement();
-		ResultSet result = st.executeQuery(ConsultaContar +  " WHERE CUIL_CUE =" + CUIL);
+		ResultSet result = st.executeQuery(ConsultaContar +  " WHERE CUIL_CUE =" + CUIL + " AND Estado_Cue = '1'");
 		result.next();
 		return result.getInt(1);
 	} catch (SQLException e) {
@@ -120,7 +120,7 @@ public class CuentaDaoImpl implements CuentaDao{
 		
 	try {
 		st = conexion.createStatement();
-		ResultSet result = st.executeQuery(BuscarCuentas + CUIL);
+		ResultSet result = st.executeQuery(BuscarCuentas + CUIL + " AND Estado_Cue = '1'");
 		return result;
 	} catch (SQLException e) {
 		e.printStackTrace();

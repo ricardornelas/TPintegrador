@@ -10,7 +10,7 @@ public class LocalidadDaoImpl implements LocalidadDao{
 
 
 	
-	public ResultSet LeerLocalidades(int IdPro) {
+	public ResultSet LeerLocalidades() {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -24,7 +24,7 @@ public class LocalidadDaoImpl implements LocalidadDao{
 		
 	try {
 		st = conexion.createStatement();
-		ResultSet result = st.executeQuery("SELECT * FROM LOCALIDADES WHERE IdProvincia_Loc ="  + IdPro);
+		ResultSet result = st.executeQuery("SELECT * FROM LOCALIDADES");
 		return result;		
 	} catch (SQLException e) {
 		e.printStackTrace();

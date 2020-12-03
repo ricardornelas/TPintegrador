@@ -11,10 +11,10 @@ import Negocio.LocalidadNegocio;
 public class LocalidadNegocioImpl implements LocalidadNegocio {
 
 
-	public ArrayList<Localidad> LeerLocalidades(int IdPro) {
+	public ArrayList<Localidad> LeerLocalidades() {
 		ArrayList<Localidad> lista = new ArrayList<Localidad>();
 		
-		ResultSet RS = new LocalidadDaoImpl().LeerLocalidades( IdPro);
+		ResultSet RS = new LocalidadDaoImpl().LeerLocalidades();
 		
 		try {
 			while(RS.next()) {
@@ -28,6 +28,24 @@ public class LocalidadNegocioImpl implements LocalidadNegocio {
 		}
 		
 		return lista;
+	}
+
+	@Override
+	public String NombreLocalidad(int IdLocalidad) {
+		ArrayList<Localidad> lista = new ArrayList<Localidad>();
+		
+		ResultSet RS = new LocalidadDaoImpl().LeerLocalidades();
+		
+		try {
+			while(RS.next()) {
+				if(RS.getInt("IdLocalidad_Loc")==IdLocalidad) return RS.getString("Descripcion_Loc");				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 }

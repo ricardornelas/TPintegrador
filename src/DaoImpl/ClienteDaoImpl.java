@@ -6,22 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import Dao.ClienteDao;
 import Entidad.Cliente;
-import Entidad.Usuario;
 
 public class ClienteDaoImpl implements ClienteDao{
 	
 	private static final String Insertar = "INSERT INTO clientes (CUIL_Cli, DNI_Cli, Nombre_Cli, Apellido_Cli, Sexo_Cli, Nacionalidad_Cli, FechaNacimiento_Cli, Direccion_Cli, IdLocalidad_Cli, IdProvincia_Cli,"
 			+ " CorreoElectronico_Cli, Usuario_Cli, NroTelefono_Cli) VALUES(?, ?, ?, ?,?, ?,?, ?,?, ?,?, ?,?)";
 	private static final String Listar = "SELECT * FROM Clientes INNER JOIN Usuarios ON Usuario_Usu = Usuario_Cli WHERE Estado_Usu = 1";
+	private static final String ListarTodo = "SELECT * FROM Clientes";
 	private static final String Filtrar = "SELECT * FROM Clientes INNER JOIN Usuarios ON Usuario_Usu = Usuario_Cli WHERE Estado_Usu = 1 AND CUIL_Cli LIKE '%";
+	private static final String FiltrarXProv = "SELECT * FROM Clientes INNER JOIN Usuarios ON Usuario_Cli = Usuario_Usu WHERE Estado_Usu = 1 and IdProvincia_Cli= ";
 	private static final String BuscarClienteXUsuario = "SELECT CUIL_Cli,DNI_Cli,Nombre_Cli,Apellido_Cli,Sexo_Cli,Nacionalidad_Cli,FechaNacimiento_Cli,Direccion_Cli,"
 			+ "Descripcion_Loc,Descripcion_Pro,CorreoElectronico_Cli,Usuario_Cli,NroTelefono_Cli FROM clientes INNER JOIN localidades ON IdLocalidad_Loc=IdLocalidad_Cli"
 			+ " INNER JOIN provincias ON IdProvincia_Pro=IdProvincia_Cli WHERE Usuario_Cli = ";
 	private static final String delete = "UPDATE bdintegrador.Clientes SET Deleted = 1 WHERE Cuil_Cli = ?";
-	private static final String update = "UPDATE bdintegrador.Clientes SET Dni_Cli = ?, Nombre_Cli = ?, Apellido_Cli = ?, FechaNacimiento_Cli = ?, Direccion_Cli = ?, Localidad_Cli = ?, Provincia_Cli = ?, Email_Cli = ?, Telefono_Cli  = ?WHERE Cuil_Cli = ? and Deleted = 0";
+	private static final String Modificar = "UPDATE Clientes SET Nombre_Cli = ?, Apellido_Cli = ?, Sexo_Cli = ?, Nacionalidad_Cli = ?,FechaNacimiento_Cli = ?, Direccion_Cli = ?, IdLocalidad_Cli = ?, IdProvincia_Cli = ?, CorreoElectronico_Cli = ?, NroTelefono_Cli  = ? WHERE Cuil_Cli = ?";
 	
 	public boolean Agregar(Cliente cliente) {
 		
@@ -72,6 +72,27 @@ public class ClienteDaoImpl implements ClienteDao{
 		return SeInserto;
 	}
 	
+public ResultSet FiltrarXProvincia(int id){
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		
+		Statement st;
+		
+	try {
+		st = conexion.createStatement();
+		ResultSet result = st.executeQuery(FiltrarXProv+ " '" +id + "'");
+		return result;		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null;
+	}
+	
 	public boolean verificarCliente(String Cuil) {
 		Statement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -81,7 +102,7 @@ public class ClienteDaoImpl implements ClienteDao{
 			statement = conexion.createStatement();
 			ResultSet result = statement.executeQuery(Buscar);    
 			result.next();
-         if(result.getInt(1)==0) {
+         if(result.getInt(1)!=0) {
              respuesta = true;
          }
      } catch(Exception e){
@@ -177,28 +198,30 @@ public class ClienteDaoImpl implements ClienteDao{
 		return isdeleteExitoso;
 	}
 
-	public boolean update(Cliente cliente) {
+	public boolean Modificar(Cliente cliente) {
 		CallableStatement cst;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean isUpdateExitoso = false;
+		boolean Modificado = false;
 		try
 		{
 			
-			cst = conexion.prepareCall(update);
-			cst.setString(1, cliente.getDni()); 
-			cst.setString(2, cliente.getNombre());
-			cst.setString(3, cliente.getApellido());
-			cst.setString(4, cliente.getFecha().toString());
-			cst.setString(5, cliente.getDireccion());
-			cst.setInt(6, cliente.getLocalidad());
-			cst.setInt(7, cliente.getProvincia());
-			cst.setString(8, cliente.getCorreo());
-			cst.setString(9, cliente.getTelefono());
+			cst = conexion.prepareCall(Modificar); 
+			cst.setString(1, cliente.getNombre());
+			cst.setString(2, cliente.getApellido());
+			cst.setInt(3, cliente.getSexo());
+			cst.setString(4,cliente.getNacionalidad());
+			cst.setString(5,cliente.getFecha());
+			cst.setString(6,cliente.getDireccion());
+			cst.setInt(7,cliente.getLocalidad());
+			cst.setInt(8,cliente.getProvincia());
+			cst.setString(9,cliente.getCorreo());
+			cst.setString(10,cliente.getTelefono());
+			cst.setString(11, cliente.getCuil());
+			
 			
 			if(cst.executeUpdate() > 0)
 			{
-				//conexion.commit();
-				isUpdateExitoso = true;
+				Modificado = true;
 			}
 			
 		} 
@@ -212,56 +235,29 @@ public class ClienteDaoImpl implements ClienteDao{
 				e1.printStackTrace();
 			}
 		}		
-		return isUpdateExitoso;
+		return Modificado;
 	}
 
-	public Cliente BuscarUsuario(Cliente cli) {
-		// Traer usuario completo - para perfil 
+	@Override
+	public ResultSet LeerTodosLosClientes() {
 		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Connection conexion = Conexion.getConexion().getSQLConexion();
 		
-					try {
-						Class.forName("com.mysql.jdbc.Driver");
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-
-				
-					try {
-						Connection conexion = Conexion.getConexion().getSQLConexion();
-						Statement st = conexion.createStatement();
-
-						ResultSet rs = st.executeQuery("Select * from usuarios");
-						while (rs.next()) {
-							
-							if(rs.getString("Usuario_Cli").equals(cli.getNombre()))
-							{
-								cli.setCuil(rs.getString("CUIL_Cli"));
-								cli.setDni(rs.getString("DNI_CLI"));
-								
-								cli.setNombre(rs.getString("Usuario_Cli"));
-								cli.setNombre(rs.getString("Nombre_Cli"));
-								cli.setApellido(rs.getString("Apellido_Cli"));
-								cli.setSexo(rs.getInt("Sexo_Cli"));
-								cli.setNacionalidad(rs.getString("Nacionalidad_cli"));
-								cli.setDireccion(rs.getString("Direccion_cli"));
-								cli.setLocalidad(rs.getInt("Localidad_cli"));
-								cli.setProvincia(rs.getInt("Provincia_cli"));
-								cli.setFecha(rs.getString("Fecha_Nacimiento_cli"));
-								cli.setTelefono(rs.getString("Telefono_cli"));
-								cli.setCorreo(rs.getString("Mail_cli"));
-								
-							}
-							
-
-						}
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-
-					}
-					return cli;
-				}
-
-	
+		Statement st;
+		
+	try {
+		st = conexion.createStatement();
+		ResultSet result = st.executeQuery(ListarTodo);
+		return result;		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null;
+	}
 }

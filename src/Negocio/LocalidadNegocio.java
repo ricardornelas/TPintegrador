@@ -5,6 +5,6 @@ import Entidad.Localidad;
 
 public interface LocalidadNegocio {
 
-	public ArrayList<Localidad> LeerLocalidades(int IdPro);
-	
+	public ArrayList<Localidad> LeerLocalidades();
+	public String NombreLocalidad(int IdLocalidad);
 }

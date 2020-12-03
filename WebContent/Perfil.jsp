@@ -22,14 +22,17 @@ td{
 		<nav class="navbar navbar-expand-lg navbar-light bg-info">
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
-     			 <li class="nav-item active">
+     			<li class="nav-item active">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="CuentasBancarias.jsp">Cuentas Bancarias</a>
       			</li>
-      			 <li class="nav-item">
+      			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MisPrestamos.jsp">Mis Prestamos</a>
       			</li>
-      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Transferencia.jsp">Transferencias</a>
+      			<li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="TransferenciaEntreCuentas.jsp">Transferir Entre Mis Cuentas</a>
+      			</li>
+      			<li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="TransferenciaOtraCuenta.jsp">Transferencia a Otra Cuenta</a>
       			</li>
     		</ul>
   		</div>

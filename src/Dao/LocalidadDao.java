@@ -4,6 +4,6 @@ import java.sql.ResultSet;
 
 public interface LocalidadDao {
 
-	public ResultSet LeerLocalidades(int IdPro);
+	public ResultSet LeerLocalidades();
 	
 }

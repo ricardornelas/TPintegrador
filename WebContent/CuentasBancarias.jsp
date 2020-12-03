@@ -17,20 +17,23 @@ text-align: center;
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">		
-		<title>Insert title here</title>
+		<title>Cuentas Bancarias</title>
 	</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-info">
   		<div class="collapse navbar-collapse" id="navbarNav">
    			 <ul class="navbar-nav">
-     			 <li class="nav-item active">
+     			<li class="nav-item active">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="CuentasBancarias.jsp">Cuentas Bancarias</a>
       			</li>
-      			 <li class="nav-item">
+      			<li class="nav-item">
        				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="MisPrestamos.jsp">Mis Prestamos</a>
       			</li>
-      			 <li class="nav-item">
-       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="Transferencia.jsp">Transferencias</a>
+      			<li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="TransferenciaEntreCuentas.jsp">Transferir Entre Mis Cuentas</a>
+      			</li>
+      			<li class="nav-item">
+       				 <a style ="margin-left: 10px; border: none" class="btn btn-outline-light" href="TransferenciaOtraCuenta.jsp">Transferencia a Otra Cuenta</a>
       			</li>
     		</ul>
   		</div>
@@ -48,7 +51,6 @@ text-align: center;
 		<br>
 		<h1>Cuentas bancarias</h1>
 		<br>
-		<form action="ServletCuenta" method="post">
 		<%ArrayList<Cuenta> Lista = new ServletCuenta().CuentasXCUIL(((Usuario)session.getAttribute("UsuarioConectado")).getNombreU()); %>
 		<table style="width:90%">
 		<thead>
@@ -61,23 +63,24 @@ text-align: center;
 			</tr>
 		</thead>
 		<%for(Cuenta reg:Lista){int i=1; %>
+			<form action="ServletCuenta" method="post">
 		<tr>
-				<td><%=i%></td>
-				<td><%=reg.getCBU() %></td>
-				<td>
-				<%if(reg.getIdTipoCuenta()==1){ %>
-				Caja de Ahorro
-				<%} else {%>
-				Cuenta Corriente
-				<%} %>
-				</td>
-				<td><%=reg.getFechaCreacion() %></td>
-				<td>$<%=reg.getSaldo() %></td>
-				<td style="width:1px"><input type="submit" value="Ver Historial de Movimientos"></td>
+					<td><%=i%></td>
+					<td><%=reg.getCBU() %><input type="hidden" name="CBU" value="<%=reg.getCBU()%>"></td>
+					<td>
+					<%if(reg.getIdTipoCuenta()==1){ %>
+					Caja de Ahorro
+					<%} else {%>
+					Cuenta Corriente
+					<%} %>
+					</td>
+					<td><%=reg.getFechaCreacion() %></td>
+					<td>$<%=reg.getSaldo() %></td>
+					<td style="width:1px"><input type="submit" name="Historial" value="Ver Historial de Movimientos"></td>
 			</tr>
+			</form>
 			<%i++;} %>
 		</table>
-		</form>
 		
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

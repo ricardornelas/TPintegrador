@@ -11,5 +11,6 @@ public boolean Agregar(Cliente cliente);
 public ArrayList<Cliente> CargarClientes();
 public ArrayList<Cliente> CargarClientesFiltrados(String CUIL);
 public ResultSet DevolverCliente(String Usuario);
-public Cliente BuscarUsuario(Cliente cli);
+public ArrayList<String> VerificarCliente(Cliente cliente);
+public boolean Modificar(Cliente cliente);
 }
