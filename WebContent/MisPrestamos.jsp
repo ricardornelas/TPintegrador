@@ -59,30 +59,29 @@ table,th,td{
 			<th>Cuotas Faltantes</th>
 		</tr>
 	</thead>
-	<%
+				<%
 					ArrayList<Prestamos> listaPres = null;
 					if (request.getAttribute("listaPrestamos") != null) {
 						listaPres = (ArrayList<Prestamos>) request.getAttribute("listaPrestamos");
 					}
+			
+					if (listaPres != null)
+						for (Prestamos pres : listaPres) {
 				%>
-				<%
-							if (listaPres != null)
-								for (Prestamos pres : listaPres) {
-						 	%>
 	<tr>
 		<td name="nroPrestamo"><%= pres.getIdPrestamo()%> </th>
 		<td name="CBU"><%=pres.getCbu() %></td>
 		<td name="Totaldeprestamo">$<%= pres.getImpPedido() %> </td>
 		<td name="ImportePagar">$<%= pres.getImpAPagar()%> </td>
-		<td name="montoMensual">$<%=pres.getMontoXMes%>></td>
+		<td name="montoMensual">$<%=pres.getMontoXMes()%>></td>
 		<td name="Cuotas"><% pres.getCuotas() %> </td>
-		<td name="CuotasPagadas"><% pres%> </td>
-		<td namer="CuotasRestantes"><% %> </td>
+		<td name="SaldoRestante"><% pres.getSaldoRestante()%> </td>
+		<td namer="CuotasRestantes"><% pres.getCuotasRestantes()%> </td>
 		<td <div style="text-align: center; border: none"><a class="btn btn-info" href="PagoDeCuotas.jsp" role="button">Seleccionar</a></div>
 ></td>
 		
 	</tr>
-		
+		<%} %>
 </table>
 <br>
 <div style="text-align: center;"><a class="btn btn-info" href="SolicitarPrestamo.jsp" role="button">Solicitar Nuevo Prestamo</a></div>
